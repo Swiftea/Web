@@ -1,0 +1,145 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html, body {
+  height: 100%; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  font-family: 'Roboto', sans-serif; }
+
+#wrapper {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  flex: 1 0 auto; }
+
+#search {
+  margin-top: 50px;
+  text-align: center; }
+  #search #logo {
+    display: inline-block;
+    margin-bottom: 40px; }
+    #search #logo img {
+      height: 60px; }
+  #search input, #search button {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    font-family: inherit; }
+  #search input {
+    margin-bottom: 20px;
+    padding: 20px 30px;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.16);
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+    #search input:focus {
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  #search button {
+    padding: 20px 30px;
+    border: none;
+    border-radius: 40px;
+    background-color: #0680ff;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s; }
+    #search button svg {
+      margin-right: 5px; }
+    #search button:hover {
+      background-color: #0073ec; }
+  #search.search-inline {
+    margin-top: 20px;
+    text-align: left; }
+
+#footer {
+  padding: 20px;
+  flex-shrink: 0;
+  text-align: center; }
+  #footer li {
+    color: #828282; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+a {
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+
+@media (min-width: 600px) {
+  #wrapper {
+    width: 70%; }
+
+  #search {
+    margin-top: 100px; }
+    #search #logo img {
+      height: initial; }
+    #search button {
+      width: auto; }
+    #search input {
+      max-width: 300px; }
+    #search.search-inline input, #search.search-inline button {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0; }
+    #search.search-inline input {
+      margin-right: 10px; } }
+@media (min-width: 900px) {
+  #search input {
+    max-width: 500px; } }
+
+/*# sourceMappingURL=master.css.map */

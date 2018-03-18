@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Swiftea - Moteur de recherche open-source</title>
+        <title>Swiftea - Moteur de recherche open source</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="css/master.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">

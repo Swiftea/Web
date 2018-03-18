@@ -27,18 +27,22 @@ body {
     flex: 1 0 auto;
 }
 
+.page {
+    margin-top: 50px;
+}
+
+#logo {
+    display: inline-block;
+    margin-bottom: 40px;
+
+    img {
+        height: 60px;
+    }
+}
+
 #search {
     margin-top: 50px;
     text-align: center;
-
-    #logo {
-        display: inline-block;
-        margin-bottom: 40px;
-
-        img {
-            height: 60px;
-        }
-    }
 
     input, button {
         display: block;
@@ -144,12 +148,33 @@ body {
 }
 
 #footer {
+    display: flex;
+    justify-content: space-between;
     padding: 20px;
     flex-shrink: 0;
     text-align: center;
 
-    li {
+    li, a {
         color: #828282;
+    }
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    margin-bottom: 20px;
+    line-height: 1.4em;
+
+    a {
+        text-decoration: underline;
     }
 }
 
@@ -160,6 +185,7 @@ img {
 
 a {
     text-decoration: none;
+    color: inherit;
 
     &:hover {
         text-decoration: underline;
@@ -171,14 +197,14 @@ a {
         width: 70%;
     }
 
+    #logo {
+        img {
+            height: initial;
+        }
+    }
+
     #search {
         margin-top: 100px;
-
-        #logo {
-            img {
-                height: initial;
-            }
-        }
 
         input {
             max-width: 500px;

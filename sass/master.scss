@@ -45,10 +45,12 @@ body {
         margin: 0 auto;
         width: 100%;
         font-family: inherit;
+        font-size: inherit;
     }
 
     input {
         margin-bottom: 20px;
+        min-width: none;
         padding: 20px 30px;
         border: none;
         border-radius: 40px;
@@ -82,8 +84,24 @@ body {
         margin-top: 20px;
         text-align: left;
 
+        form {
+            display: flex;
+        }
+
+        input, button {
+            display: inline-block;
+            margin: 0;
+        }
+
+        input {
+            margin-right: 10px;
+            max-width: none;
+            width: 100%;
+        }
+
         button {
             padding: 20px;
+            width: auto;
         }
     }
 }
@@ -172,18 +190,7 @@ a {
 
         &.search-inline {
             form {
-                display: flex;
                 max-width: $max_results_width;
-            }
-
-            input, button {
-                display: inline-block;
-                margin: 0;
-            }
-
-            input {
-                margin-right: 10px;
-                max-width: none;
             }
         }
     }

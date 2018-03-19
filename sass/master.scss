@@ -115,7 +115,6 @@ body {
     max-width: $max_results_width;
 
     .result {
-        margin-bottom: 20px;
         padding: 20px;
         background-color: #ffffff;
         border-radius: 10px;
@@ -142,7 +141,12 @@ body {
         }
 
         .result-url {
+            margin-bottom: 0;
             color: #16a085;
+        }
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
         }
     }
 }

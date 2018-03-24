@@ -134,6 +134,10 @@ body {
             a {
                 color: $blue;
             }
+
+            img {
+                max-height: 16px;
+            }
         }
 
         .result-description {

@@ -160,16 +160,23 @@ if(!empty($websites_id)) {
 
 <section id="results">
     <?php
-    foreach ($results as $result) {
-        if (empty($result['favicon'])) {
-            $result['favicon'] = 'assets/img/default-favicon.png';
+    if (isset($results)) {
+        foreach ($results as $result) {
+            if (empty($result['favicon'])) {
+                $result['favicon'] = 'assets/img/default-favicon.png';
+            }
+        ?>
+            <div class="result">
+                <p class="result-title"><img src="<?php echo $result['favicon']; ?>" alt=""> <a href="<?php echo $result['url']; ?>"><?php echo $result['title']; ?></a></p>
+                <p class="result-description"><?php echo $result['description']; ?></p>
+                <p class="result-url"><?php echo $result['url']; ?></p>
+            </div>
+        <?php
         }
+    }
+    else {
     ?>
-        <div class="result">
-            <p class="result-title"><img src="<?php echo $result['favicon']; ?>" alt=""> <a href="<?php echo $result['url']; ?>"><?php echo $result['title']; ?></a></p>
-            <p class="result-description"><?php echo $result['description']; ?></p>
-            <p class="result-url"><?php echo $result['url']; ?></p>
-        </div>
+        Aucun résultat...
     <?php
     }
     ?>

@@ -1,8 +1,8 @@
 <?php
 require_once('templates/header.php');
 
-$q = htmlspecialchars($_GET['q']);
-$q = mb_strtolower(trim($q));
+$q = $search = trim(htmlspecialchars($_GET['q']));
+$q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 
 // Find the files to read
@@ -151,7 +151,7 @@ if(!empty($websites_id)) {
 
 <section id="search" class="search-inline">
     <form method="GET" action="search">
-        <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus value="<?php echo $q; ?>" size="1" onfocus="var tmp=this.value; this.value=''; this.value=tmp">
+        <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var tmp=this.value; this.value=''; this.value=tmp">
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
 </section>

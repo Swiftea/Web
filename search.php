@@ -2,14 +2,11 @@
 require_once('templates/header.php');
 
 $q = htmlspecialchars($_GET['q']);
-
-$search = mb_strtolower(trim($q));
+$q = mb_strtolower(trim($q));
 $keywords = array_unique(explode(' ', $q));
 
-// Vars
-$index_ext = '.sif';
+// Find the files to read
 
-// Files to read
 $files = array();
 
 foreach($keywords as $keyword) {
@@ -37,7 +34,7 @@ foreach($keywords as $keyword) {
     }
 }
 
-// Inverted index
+// Read the inverted-index
 
 $websites_id = array();
 
@@ -71,6 +68,7 @@ foreach ($languages as $language) {
 $json = null;
 
 // Ranking
+
 if(!empty($websites_id)) {
     $rank_results = array();
     $str_results = implode(',', array_keys($rank_results));

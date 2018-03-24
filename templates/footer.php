@@ -1,7 +1,7 @@
     </div>
     <footer id="footer">
         <ul>
-            <li><a href="about.php">À propos</a></li>
+            <li><a href="about">À propos</a></li>
         </ul>
         <ul>
             <li>Version dev</li>

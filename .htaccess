@@ -1,5 +1,12 @@
 RewriteEngine On
 
+# Force https
+
 RewriteCond %{HTTPS} !=on
 RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Remove the .php extension
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]

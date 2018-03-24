@@ -1,3 +1,16 @@
+<?php
+function get_base_url() {
+    $currentPath = $_SERVER['PHP_SELF'];
+    $pathInfo = pathinfo($currentPath);
+    $hostName = $_SERVER['HTTP_HOST'];
+    $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+    $url = $protocol.$hostName.$pathInfo['dirname'];
+    if (substr($url, -1) != '/') {
+        $url .= '/';
+    }
+    return $url;
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -12,5 +25,5 @@
     <body>
         <div id="wrapper">
             <header id="header">
-                <a href="index.php"><img src="assets/img/logo-112x35.png" alt="Swiftea"></a>
+                <a href="<?php echo get_base_url(); ?>"><img src="assets/img/logo-112x35.png" alt="Swiftea"></a>
             </header>

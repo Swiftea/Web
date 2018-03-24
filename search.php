@@ -162,7 +162,9 @@ if(!empty($websites_id)) {
     <?php
     if (isset($results)) {
         foreach ($results as $result) {
-            if (empty($result['favicon'])) {
+            if ((empty($result['favicon'])
+                || substr($result['favicon'], 0, 8) !== 'https://')
+            ) {
                 $result['favicon'] = 'assets/img/default-favicon.png';
             }
         ?>

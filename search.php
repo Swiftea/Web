@@ -193,7 +193,7 @@ if(!empty($words)) {
         }
     }
     else {
-        echo 'Aucun résultat...';
+        echo '<span class="nb-results">Aucun résultat...</span>';
     }
     ?>
 </section>

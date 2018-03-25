@@ -10,3 +10,22 @@ function get_base_url() {
     }
     return $url;
 }
+
+function truncate_str($str, $length, $beautiful = true) {
+    //no need to trim, already shorter than trim length
+    if (strlen($str) <= $length) {
+        return $str;
+    }
+
+    if ($beautiful) {
+        //find last space within length
+        $last_space = strrpos(substr($str, 0, $length), ' ');
+        $trimmed_text = substr($str, 0, $last_space);
+    }
+    else {
+        $trimmed_text = substr($str, 0, $length);
+    }
+    $trimmed_text .= '...';
+
+    return $trimmed_text;
+}

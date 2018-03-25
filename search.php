@@ -193,9 +193,17 @@ if(!empty($words)) {
 <nav id="pagination">
     <ul>
         <?php
-        for ($i=1; $i <= $pages; $i++) {
-            $class = ($page == $i) ? 'active' : '';
-            echo '<li class="' . $class . '"><a href="search?q=' . $_GET['q'] . '&p=' . $i . '">' . $i . '</a></li>';
+        $url = 'search?q=' . $_GET['q'] . '&p=';
+
+        if ($page > 2) {
+            echo '<li><a href="' . $url . '1"><i class="fas fa-angle-left"></i><i class="fas fa-angle-left"></i></a></li>';
+        }
+        if ($page > 1) {
+            echo '<li><a href="' . $url . ($page - 1) . '"><i class="fas fa-angle-left"></i></a></li>';
+        }
+        echo '<li class="disabled"><span>Page ' . $page . '</span></li>';
+        if ($page < $pages) {
+            echo '<li><a href="' . $url . ($page + 1) . '">Suivante <i class="fas fa-angle-right"></i></a></li>';
         }
         ?>
     </ul>

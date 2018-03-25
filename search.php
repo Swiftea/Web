@@ -162,7 +162,7 @@ if(!empty($words)) {
 
 <section id="search" class="search-inline">
     <form method="GET" action="search">
-        <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var tmp=this.value; this.value=''; this.value=tmp">
+        <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v" required>
         <button type="submit"><i class="fas fa-search"></i></button>
     </form>
 </section>
@@ -170,6 +170,8 @@ if(!empty($words)) {
 <section id="results">
     <?php
     if (isset($results)) {
+        $str = $nb_results > 1 ? 'résultats' : 'résultat';
+        echo '<span class="nb-results">' . $nb_results . ' ' . $str . '</span>';
         foreach ($results as $result) {
             if ((empty($result['favicon'])
                 || substr($result['favicon'], 0, 8) !== 'https://')
@@ -186,9 +188,7 @@ if(!empty($words)) {
         }
     }
     else {
-    ?>
-        Aucun résultat...
-    <?php
+        echo 'Aucun résultat...';
     }
     ?>
 </section>

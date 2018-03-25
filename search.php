@@ -189,24 +189,29 @@ if(!empty($words)) {
     }
     ?>
 </section>
+<?php
+if (isset($results)) {
+?>
+    <nav id="pagination">
+        <ul>
+            <?php
+            $url = 'search?q=' . $_GET['q'] . '&p=';
 
-<nav id="pagination">
-    <ul>
-        <?php
-        $url = 'search?q=' . $_GET['q'] . '&p=';
+            if ($page > 2) {
+                echo '<li><a href="' . $url . '1"><i class="fas fa-angle-left"></i><i class="fas fa-angle-left"></i></a></li>';
+            }
+            if ($page > 1) {
+                echo '<li><a href="' . $url . ($page - 1) . '"><i class="fas fa-angle-left"></i></a></li>';
+            }
+            echo '<li class="disabled"><span>Page ' . $page . '</span></li>';
+            if ($page < $pages) {
+                echo '<li><a href="' . $url . ($page + 1) . '">Suivante <i class="fas fa-angle-right"></i></a></li>';
+            }
+            ?>
+        </ul>
+    </nav>
+<?php
+}
 
-        if ($page > 2) {
-            echo '<li><a href="' . $url . '1"><i class="fas fa-angle-left"></i><i class="fas fa-angle-left"></i></a></li>';
-        }
-        if ($page > 1) {
-            echo '<li><a href="' . $url . ($page - 1) . '"><i class="fas fa-angle-left"></i></a></li>';
-        }
-        echo '<li class="disabled"><span>Page ' . $page . '</span></li>';
-        if ($page < $pages) {
-            echo '<li><a href="' . $url . ($page + 1) . '">Suivante <i class="fas fa-angle-right"></i></a></li>';
-        }
-        ?>
-    </ul>
-</nav>
-
-<?php require_once('templates/footer.php'); ?>
+require_once('templates/footer.php');
+?>

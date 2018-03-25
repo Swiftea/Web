@@ -193,7 +193,7 @@ if(!empty($words)) {
 <nav id="pagination">
     <ul>
         <?php
-        for ($i=1; $i < $pages; $i++) {
+        for ($i=1; $i <= $pages; $i++) {
             $class = ($page == $i) ? 'active' : '';
             echo '<li class="' . $class . '"><a href="search?q=' . $_GET['q'] . '&p=' . $i . '">' . $i . '</a></li>';
         }

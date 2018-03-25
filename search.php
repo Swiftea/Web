@@ -132,6 +132,8 @@ if(!empty($words)) {
         }
     }
 
+    $nb_results = count($criterias); // Get the real number of results (after SQL query)
+
     unset($criterias); unset($files); unset($words);
 
     arsort($rank_results);

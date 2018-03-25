@@ -149,7 +149,12 @@ if(!empty($words)) {
 
     $first_site = ($page - 1) * $max_results_per_page;
     $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
-    $in = str_repeat('?,', $max_results_per_page - 1) . '?';
+    if ($nb_results > $max_results_per_page) {
+        $in = str_repeat('?,', $max_results_per_page - 1) . '?';
+    }
+    else {
+        $in = str_repeat('?,', $nb_results - 1) . '?';
+    }
 
     // Get final results
 

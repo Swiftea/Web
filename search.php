@@ -101,7 +101,7 @@ if(!empty($words)) {
     $ids_array = array_keys($rank_results);
     $in = str_repeat('?,', $nb_results - 1) . '?';
 
-    $sql = "SELECT url, popularity, score, homepage FROM website WHERE id IN ($in)";
+    $sql = "SELECT popularity, score, homepage FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);
     $stmt->execute($ids_array);
     $criterias = $stmt->fetchAll();
@@ -140,15 +140,18 @@ if(!empty($words)) {
 
     // Pagination
 
-    $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;
     $pages = ceil($nb_results / $max_results_per_page);
 
+    $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;
+    if ($page < 1 || $page > $pages) {
+        $page = 1;
+    }
+
     $first_site = ($page - 1) * $max_results_per_page;
-
-    // Get final results
-
     $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
     $in = str_repeat('?,', $max_results_per_page - 1) . '?';
+
+    // Get final results
 
     $sql = "SELECT title, description, url, favicon FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);

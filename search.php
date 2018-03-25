@@ -193,7 +193,7 @@ if(!empty($words)) {
     ?>
 </section>
 <?php
-if (isset($results)) {
+if (isset($results) && $nb_results > $max_results_per_page) {
 ?>
     <nav id="pagination">
         <ul>

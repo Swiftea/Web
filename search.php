@@ -1,11 +1,13 @@
 <?php
 require_once('templates/header.php');
 
+// Get the user request
+
 $q = $search = trim(htmlspecialchars($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 
-// Find the files to read
+// Find the files to read in the inverted index
 
 $files = array();
 
@@ -36,7 +38,7 @@ foreach($keywords as $keyword) {
 
 // Read the inverted-index
 
-$websites_id = array();
+$words = array();
 
 // For each language folder (ex: en)
 foreach ($languages as $language) {
@@ -49,14 +51,14 @@ foreach ($languages as $language) {
             foreach($keywords as $keyword) {
                 // If this keyword is in the inverted-index
                 if(isset($json[$keyword])) {
-                    if(!isset($websites_id[$keyword]['nb_results'])) {
-                        $websites_id[$keyword]['nb_results'] = 0;
+                    if(!isset($words[$keyword]['nb_results'])) {
+                        $words[$keyword]['nb_results'] = 0;
                     }
 
                     // For each website
                     foreach($json[$keyword] as $id => $tf) {
-                        $websites_id[$keyword]['results'][$id] = $tf;
-                        $websites_id[$keyword]['nb_results'] += 1;
+                        $words[$keyword]['results'][$id] = $tf;
+                        $words[$keyword]['nb_results'] += 1;
                     }
                 }
             }
@@ -65,21 +67,19 @@ foreach ($languages as $language) {
     }
 }
 
-$json = null;
-
 // Ranking
 
-if(!empty($websites_id)) {
-    $rank_results = array();
-    $str_results = implode(',', array_keys($rank_results));
-
+if(!empty($words)) {
+    // Get number of websites in our index
     $sql = 'SELECT count(*) FROM website';
     $stmt = $db->prepare($sql);
     $stmt->execute();
     $index_size = $stmt->fetchColumn();
 
+    $rank_results = array();
+
     // #1 TF-IDF
-    foreach ($websites_id as $keyword => $ids_per_word) {
+    foreach ($words as $keyword => $ids_per_word) {
         $idf = log($index_size / $ids_per_word['nb_results']);
 
         foreach($ids_per_word['results'] as $id => $tf) {
@@ -93,18 +93,17 @@ if(!empty($websites_id)) {
                 $rank_results[$id] += $tf_idf;
             }
         }
-
         unset($idf);
     }
 
     $nb_results = count($rank_results);
 
-    $in_array = array_keys($rank_results);
+    $ids_array = array_keys($rank_results);
     $in = str_repeat('?,', $nb_results - 1) . '?';
 
     $sql = "SELECT url, popularity, score, homepage FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);
-    $stmt->execute($in_array);
+    $stmt->execute($ids_array);
     $criterias = $stmt->fetchAll();
 
     // #2 Score, #3 Popularity
@@ -124,28 +123,37 @@ if(!empty($websites_id)) {
         $popularity = $criterias[$i]['popularity'] * 0.05;
         $homepage = ($criterias[$i]['homepage'] == '1') ? 1 : 0;
 
-        $spam = ($rank_results[$in_array[$i]] > 1) ? true : false;
+        $spam = ($rank_results[$ids_array[$i]] > 1) ? true : false;
 
-        $rank_results[$in_array[$i]] += log($score + $homepage + $popularity);
+        $rank_results[$ids_array[$i]] += log($score + $homepage + $popularity);
 
         if ($spam) {
-            $rank_results[$in_array[$i]] /= 3;
+            $rank_results[$ids_array[$i]] /= 3;
         }
     }
 
-    $files = $websites_id = $in_array = $criterias = null;
-    unset($criterias); unset($files); unset($websites_id);
+    unset($criterias); unset($files); unset($words);
 
     arsort($rank_results);
 
-    $in_array = array_keys($rank_results);
+    $ids_array = array_keys($rank_results);
 
-    $sql = "SELECT * FROM website WHERE id IN ($in)";
+    // Pagination
+
+    $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;
+    $pages = ceil($nb_results / $max_results_per_page);
+
+    $first_site = ($page - 1) * $max_results_per_page;
+
+    // Get final results
+
+    $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
+    $in = str_repeat('?,', $max_results_per_page - 1) . '?';
+
+    $sql = "SELECT title, description, url, favicon FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);
-    $stmt->execute($in_array);
+    $stmt->execute($final_ids_array);
     $results = $stmt->fetchAll();
-
-    unset($in_array);
 }
 ?>
 
@@ -181,5 +189,16 @@ if(!empty($websites_id)) {
     }
     ?>
 </section>
+
+<nav id="pagination">
+    <ul>
+        <?php
+        for ($i=1; $i < $pages; $i++) {
+            $class = ($page == $i) ? 'active' : '';
+            echo '<li class="' . $class . '"><a href="search?q=' . $_GET['q'] . '&p=' . $i . '">' . $i . '</a></li>';
+        }
+        ?>
+    </ul>
+</nav>
 
 <?php require_once('templates/footer.php'); ?>

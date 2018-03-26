@@ -1,10 +1,10 @@
 <?php
 function get_base_url() {
-    $currentPath = $_SERVER['PHP_SELF'];
-    $pathInfo = pathinfo($currentPath);
-    $hostName = $_SERVER['HTTP_HOST'];
+    $current_path = $_SERVER['PHP_SELF'];
+    $path_info = pathinfo($current_path);
+    $host_name = $_SERVER['HTTP_HOST'];
     $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
-    $url = $protocol.$hostName.$pathInfo['dirname'];
+    $url = $protocol . $host_name . $path_info['dirname'];
     if (substr($url, -1) != '/') {
         $url .= '/';
     }

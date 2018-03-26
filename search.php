@@ -11,19 +11,19 @@ $keywords = array_unique(explode(' ', $q));
 
 $files = array();
 
-foreach($keywords as $keyword) {
+foreach ($keywords as $keyword) {
     $first_letter = mb_substr($keyword, 0, 1);
     $second_letter = mb_substr($keyword, 1, 1);
     $two_letters = $first_letter . $second_letter;
 
-    if(ctype_alpha($two_letters)) {
+    if (ctype_alpha($two_letters)) {
         $file = strtoupper($first_letter) . '/' . $two_letters . $index_ext;
     }
     else {
-        if(ctype_lower($first_letter)) {
+        if (ctype_lower($first_letter)) {
             $file = strtoupper($first_letter) . '/' . $first_letter . '-sp' . $index_ext;
         }
-        elseif(ctype_lower($second_letter)) {
+        elseif (ctype_lower($second_letter)) {
             $file = 'SP/sp-' . $second_letter . $index_ext;
         }
         else {
@@ -31,7 +31,7 @@ foreach($keywords as $keyword) {
         }
     }
 
-    if(!in_array($file, $files)) {
+    if (!in_array($file, $files)) {
         $files[] = $file;
     }
 }
@@ -43,20 +43,20 @@ $words = array();
 // For each language folder (ex: en)
 foreach ($languages as $language) {
     // For each files to open (ex: aa.sif)
-    foreach($files as $file) {
+    foreach ($files as $file) {
         $path = $index_folder . strtoupper($language) . '/' . $file;
         if (file_exists($path)) {
             $json = json_decode(file_get_contents($path), true);
             // For each keyword of query
-            foreach($keywords as $keyword) {
+            foreach ($keywords as $keyword) {
                 // If this keyword is in the inverted-index
-                if(isset($json[$keyword])) {
-                    if(!isset($words[$keyword]['nb_results'])) {
+                if (isset($json[$keyword])) {
+                    if (!isset($words[$keyword]['nb_results'])) {
                         $words[$keyword]['nb_results'] = 0;
                     }
 
                     // For each website
-                    foreach($json[$keyword] as $id => $tf) {
+                    foreach ($json[$keyword] as $id => $tf) {
                         $words[$keyword]['results'][$id] = $tf;
                         $words[$keyword]['nb_results'] += 1;
                     }
@@ -69,7 +69,7 @@ foreach ($languages as $language) {
 
 // Ranking
 
-if(!empty($words)) {
+if (!empty($words)) {
     // Get number of websites in our index
     $sql = 'SELECT count(*) FROM website';
     $stmt = $db->prepare($sql);
@@ -82,9 +82,9 @@ if(!empty($words)) {
     foreach ($words as $keyword => $ids_per_word) {
         $idf = log($index_size / $ids_per_word['nb_results']);
 
-        foreach($ids_per_word['results'] as $id => $tf) {
+        foreach ($ids_per_word['results'] as $id => $tf) {
             $tf_idf = ($ids_per_word['results'][$id] * $idf);
-            if(!isset($rank_results[$id])) {
+            if (!isset($rank_results[$id])) {
                 // Create it
                 $rank_results[$id] = $tf_idf;
             }

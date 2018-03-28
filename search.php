@@ -101,14 +101,18 @@ if (!empty($words)) {
     $ids_array = array_keys($rank_results);
     $in = str_repeat('?,', $nb_results - 1) . '?';
 
-    $sql = "SELECT popularity, score, homepage FROM website WHERE id IN ($in)";
+    $sql = "SELECT id, popularity, score, homepage FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);
     $stmt->execute($ids_array);
     $criterias = $stmt->fetchAll();
 
     // #2 Score, #3 Popularity
-    for ($i = 0; $i < $nb_results; $i++) {
-        switch ($criterias[$i]['score']) {
+    $rank_results2 = array();
+
+    foreach ($criterias as $criteria) {
+        $rank_results2[$criteria['id']] = $rank_results[$criteria['id']];
+
+        switch ($criteria['score']) {
             case '1':
                 $score = 0.25;
                 break;
@@ -120,25 +124,25 @@ if (!empty($words)) {
                 break;
         }
 
-        $popularity = $criterias[$i]['popularity'] * 0.05;
-        $homepage = ($criterias[$i]['homepage'] == '1') ? 1 : 0;
+        $popularity = $criteria['popularity'] * 0.05;
+        $homepage = ($criteria['homepage'] == '1') ? 1 : 0;
 
-        $spam = ($rank_results[$ids_array[$i]] > 1) ? true : false;
+        $spam = ($rank_results2[$criteria['id']] > 1) ? true : false;
 
-        $rank_results[$ids_array[$i]] += log($score + $homepage + $popularity);
+        $rank_results2[$criteria['id']] += log($score + $homepage + $popularity);
 
         if ($spam) {
-            $rank_results[$ids_array[$i]] /= 3;
+            $rank_results2[$criteria['id']] /= 3;
         }
     }
 
-    $nb_results = count($criterias); // Get the real number of results (after SQL query)
+    $nb_results = count($rank_results2); // Get the real number of results (after SQL query)
 
-    unset($criterias); unset($files); unset($words);
+    unset($rank_results); unset($criterias); unset($files); unset($words);
 
-    arsort($rank_results);
+    arsort($rank_results2);
 
-    $ids_array = array_keys($rank_results);
+    $ids_array = array_keys($rank_results2);
 
     // Pagination
 

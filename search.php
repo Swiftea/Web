@@ -6,6 +6,7 @@ require_once('templates/header.php');
 $q = $search = htmlspecialchars(trim($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
+$nb_keywords = count($keywords);
 
 // Find the files to read in the inverted index
 
@@ -111,7 +112,10 @@ if (!empty($words)) {
 
         $score = $criteria['score'] / 4;
         $popularity = $criteria['popularity'] * 0.05;
-        $homepage = ($criteria['homepage'] == '1') ? 1 : 0;
+        $homepage = 0;
+        if ($nb_keywords == 1 && $criteria['homepage'] == '1') {
+            $homepage = 1;
+        }
         $keyword_url = 0;
         foreach ($keywords as $keyword) {
             if (strpos($criteria['url'], $keyword) !== false) {

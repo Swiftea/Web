@@ -9,8 +9,8 @@ function read_file($filename) {
 }
 
 // Get a value in cache by its name
-function get_cache_value($name) {
-    $json_data = read_file('cache/values.json');
+function get_cache_value($name, $cache) {
+    $json_data = read_file('cache/' . $cache . '.json');
     if ($json_data) {
         $values = json_decode($json_data, true);
 
@@ -23,9 +23,9 @@ function get_cache_value($name) {
 }
 
 // Save a value in cache with its name and a duration
-function set_cache_value($name, $value, $hours=2) {
+function set_cache_value($name, $value, $hours=2, $cache) {
     $values = array();
-    $json_data = read_file('cache/values.json');
+    $json_data = read_file('cache/' . $cache . '.json');
     if ($json_data) {
         $values = json_decode($json_data, true);
     }
@@ -34,17 +34,17 @@ function set_cache_value($name, $value, $hours=2) {
         'duration' => $hours,
         'time' => time()
     );
-    file_put_contents('cache/values.json', json_encode($values));
+    file_put_contents('cache/' . $cache . '.json', json_encode($values));
 }
 
 function get_index_size($db) {
-    $index_size = get_cache_value('index_size');
+    $index_size = get_cache_value('index_size', 'values');
     if (!$index_size) {
         $sql = 'SELECT count(*) FROM website';
         $stmt = $db->prepare($sql);
         $stmt->execute();
         $index_size = $stmt->fetchColumn();
-        set_cache_value('index_size', $index_size);
+        set_cache_value('index_size', $index_size, 'values');
     }
     return $index_size;
 }

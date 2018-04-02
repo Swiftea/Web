@@ -1,6 +1,7 @@
     </div>
     <footer id="footer">
         <ul>
+            <li><a href="status">Statut</a></li>
             <li><a href="about">À propos</a></li>
         </ul>
         <ul>

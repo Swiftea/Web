@@ -1,4 +1,11 @@
 <?php
+function get_index_size($db) {
+    $sql = 'SELECT count(*) FROM website';
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
 function get_base_url() {
     $current_path = $_SERVER['PHP_SELF'];
     $path_info = pathinfo($current_path);

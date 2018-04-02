@@ -71,10 +71,7 @@ foreach ($languages as $language) {
 
 if (!empty($words)) {
     // Get number of websites in our index
-    $sql = 'SELECT count(*) FROM website';
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $index_size = $stmt->fetchColumn();
+    $index_size = get_index_size($db);
 
     $rank_results = array();
 

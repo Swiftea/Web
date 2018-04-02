@@ -7,13 +7,11 @@
     <div class="card">
         <h2>Open Source</h2>
         <p>
-            Le projet est <a href="https://github.com/Swiftea">disponible sur GitHub</a> sous licence GNU GPL v3. Il fonctionne grâce à deux programmes majeurs :
+            Le code source est disponible <a href="https://github.com/Swiftea">sur GitHub</a> sous licence GNU GPL v3. Il fonctionne grâce à deux programmes :
         </p>
         <ul>
-            <li>Le <a href="https://github.com/Swiftea/Crawler">crawler</a> :</li>
-            <p>Il parcoure le web afin de connaître un maximum de sites internet. Il est codé en Python.</p>
-            <li>Le <a href="https://github.com/Swiftea/Web">site web</a> :</li>
-            <p>Il s'agit de l'interface qui vous présente les résultats de vos recherches. Elle est écrite en PHP.</p>
+            <li><a href="https://github.com/Swiftea/Crawler">Crawler</a> : il parcoure le web afin de connaître un maximum de pages web. Il est codé en Python.</li>
+            <li><a href="https://github.com/Swiftea/Web">Web</a> : il s'agit de l'interface qui vous présente les résultats de vos recherches. Elle est écrite en PHP.</li>
         </ul>
     </div>
     <div class="card">
@@ -23,6 +21,7 @@
             <li>La méthode <a href="https://fr.wikipedia.org/wiki/TF-IDF">TF-IDF</a></li>
             <li>Un score calculé de manière unique pour chaque page</li>
             <li>Un indice de popularité mesuré par le crawler</li>
+            <li>Les mots-clés dans l'adresse de chaque page</li>
         </ul>
         <p>Si une page abuse de l'utilisation de mots-clés optimisés, elle se voit pénalisée dans les résultats.</p>
     </div>

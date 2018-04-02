@@ -184,7 +184,9 @@ if (!empty($words)) {
             <div class="result">
                 <p class="result-title"><img src="<?php echo $result['favicon']; ?>" alt=""> <a href="<?php echo $result['url']; ?>"><?php echo truncate_str($result['title'], 80); ?></a></p>
                 <p class="result-description"><?php echo truncate_str($result['description'], 150); ?></p>
-                <p class="result-url"><?php echo truncate_str($result['url'], 60, false); ?></p>
+                <p class="result-url <?php echo is_https($result['url']) ? 'secure' : ''; ?>">
+                    <?php echo truncate_str($result['url'], 60, false); ?>
+                </p>
             </div>
         <?php
         }

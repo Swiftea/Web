@@ -168,7 +168,11 @@ body {
 
         .result-url {
             margin-bottom: 0;
-            color: #16a085;
+            color: #576574;
+
+            &.secure {
+                color: #10ac84;
+            }
         }
 
         &:not(:last-child) {

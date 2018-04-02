@@ -43,7 +43,7 @@ $words = array();
 
 // For each language folder (ex: en)
 foreach ($languages as $language) {
-    // For each files to open (ex: aa.sif)
+    // For each file to open (ex: aa.sif)
     foreach ($files as $file) {
         $path = $index_folder . strtoupper($language) . '/' . $file;
         if (file_exists($path)) {
@@ -63,9 +63,11 @@ foreach ($languages as $language) {
                     }
                 }
             }
-            unset($json);
         }
     }
+}
+if (isset($json)) {
+    unset($json);
 }
 
 // Ranking
@@ -77,7 +79,7 @@ if (!empty($words)) {
     $rank_results = array();
 
     // #1 TF-IDF
-    foreach ($words as $keyword => $ids_per_word) {
+    foreach ($words as $word => $ids_per_word) {
         $idf = log($index_size / $ids_per_word['nb_results']);
 
         foreach ($ids_per_word['results'] as $id => $tf) {
@@ -91,7 +93,6 @@ if (!empty($words)) {
                 $rank_results[$id] += $tf_idf;
             }
         }
-        unset($idf);
     }
 
     $nb_results = count($rank_results);
@@ -137,7 +138,7 @@ if (!empty($words)) {
 
     unset($rank_results); unset($criterias); unset($files); unset($words);
 
-    arsort($rank_results2);
+    arsort($rank_results2); // Sort the results by their final score
 
     $ids_array = array_keys($rank_results2);
 
@@ -179,7 +180,7 @@ if (!empty($words)) {
     <?php
     if (isset($results)) {
         $str = $nb_results > 1 ? 'résultats' : 'résultat';
-        echo '<span class="nb-results">' . $nb_results . ' ' . $str . '</span>';
+        echo '<span class="nb-results">' . $nb_results . ' ' . $str . ' - en ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';
         foreach ($results as $result) {
             if (empty($result['favicon']) || !is_https($result['favicon'])) {
                 $result['favicon'] = 'assets/img/default-favicon.png';

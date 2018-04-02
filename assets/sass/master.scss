@@ -133,7 +133,7 @@ body {
         display: block;
         margin-bottom: 20px;
         margin-left: 30px;
-        color: #7c7c7c;
+        color: $disabled;
     }
 
     .result {
@@ -168,7 +168,7 @@ body {
 
         .result-url {
             margin-bottom: 0;
-            color: #576574;
+            color: $disabled;
 
             &.secure {
                 color: #10ac84;

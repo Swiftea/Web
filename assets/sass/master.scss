@@ -171,7 +171,7 @@ body {
             color: $disabled;
 
             &.secure {
-                color: #10ac84;
+                color: $success;
             }
         }
 
@@ -277,6 +277,14 @@ p, ul {
 
     a {
         text-decoration: underline;
+    }
+
+    .fa-check {
+        color: $success;
+    }
+
+    .fa-times {
+        color: $error;
     }
 }
 

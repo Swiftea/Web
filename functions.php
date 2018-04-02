@@ -13,11 +13,12 @@ function get_cache_value($name, $cache) {
     $json_data = read_file('cache/' . $cache . '.json');
     if ($json_data) {
         $values = json_decode($json_data, true);
-
-        // Verify duration
-        $seconds = 60 * 60 * $values[$name]['duration'];
-        if((time() - $values[$name]['time']) < $seconds) {
-            return $values[$name]['value'];
+        if (isset($values[$name])) {
+            // Verify duration
+            $seconds = 60 * 60 * $values[$name]['duration'];
+            if((time() - $values[$name]['time']) < $seconds) {
+                return $values[$name]['value'];
+            }
         }
     }
 }
@@ -37,14 +38,24 @@ function set_cache_value($name, $value, $cache, $hours=2) {
     file_put_contents('cache/' . $cache . '.json', json_encode($values));
 }
 
-function get_index_size($db) {
-    $index_size = get_cache_value('index_size', 'values');
+function get_index_size($db, $lang='') {
+    if ($lang) {
+        $lang = '_' . $lang;
+    }
+    $index_size = get_cache_value('index_size' . $lang, 'values');
     if (!$index_size) {
-        $sql = 'SELECT count(*) FROM website';
-        $stmt = $db->prepare($sql);
-        $stmt->execute();
+        if ($lang) {
+            $sql = 'SELECT count(*) FROM website WHERE language = :lang';
+            $stmt = $db->prepare($sql);
+            $stmt->execute(array(':lang' => substr($lang, 1)));
+        }
+        else {
+            $sql = 'SELECT count(*) FROM website';
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        }
         $index_size = $stmt->fetchColumn();
-        set_cache_value('index_size', $index_size, 'values');
+        set_cache_value('index_size' . $lang, $index_size, 'values');
     }
     return $index_size;
 }

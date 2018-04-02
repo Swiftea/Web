@@ -112,18 +112,7 @@ if (!empty($words)) {
     foreach ($criterias as $criteria) {
         $rank_results2[$criteria['id']] = $rank_results[$criteria['id']];
 
-        switch ($criteria['score']) {
-            case '1':
-                $score = 0.25;
-                break;
-            case '2':
-                $score = 0.5;
-                break;
-            case '3':
-                $score = 0.75;
-                break;
-        }
-
+        $score = $criteria['score'] / 4;
         $popularity = $criteria['popularity'] * 0.05;
         $homepage = ($criteria['homepage'] == '1') ? 1 : 0;
         $keyword_url = 0;
@@ -136,7 +125,7 @@ if (!empty($words)) {
 
         $spam = ($rank_results2[$criteria['id']] > 1) ? true : false;
 
-        $rank_results2[$criteria['id']] += $score + $popularity + $homepage + $keyword_url;
+        $rank_results2[$criteria['id']] += log($score + $popularity + $homepage + $keyword_url);
 
         if ($spam) {
             $rank_results2[$criteria['id']] /= 3;

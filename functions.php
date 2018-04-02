@@ -61,6 +61,10 @@ function get_base_url() {
     return $url;
 }
 
+function is_https($url) {
+    return substr($url, 0, 8) === 'https://';
+}
+
 function truncate_str($str, $length, $beautiful = true) {
     // no need to trim, already shorter than trim length
     if (strlen($str) <= $length) {

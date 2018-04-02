@@ -177,9 +177,7 @@ if (!empty($words)) {
         $str = $nb_results > 1 ? 'résultats' : 'résultat';
         echo '<span class="nb-results">' . $nb_results . ' ' . $str . '</span>';
         foreach ($results as $result) {
-            if ((empty($result['favicon'])
-                || substr($result['favicon'], 0, 8) !== 'https://')
-            ) {
+            if (empty($result['favicon']) || !is_https($result['favicon'])) {
                 $result['favicon'] = 'assets/img/default-favicon.png';
             }
         ?>

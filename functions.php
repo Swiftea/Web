@@ -1,29 +1,40 @@
 <?php
+function read_file($filename) {
+    if (file_exists($filename)) {
+        $content = file_get_contents($filename);
+        if ($content !== false) {
+            return $content;
+        }
+    }
+}
+
 // Get a value in cache by its name
 function get_cache_value($name) {
-    $json_data = file_get_contents('cache/values.json');
-    $array = json_decode($json_data, true);
+    $json_data = read_file('cache/values.json');
+    if ($json_data) {
+        $values = json_decode($json_data, true);
 
-    // Verify duration
-    $seconds = 60 * 60 * $array[$name]['duration'];
-    if((time() - $array[$name]['time']) < $seconds) {
-        return $array[$name]['value'];
-    }
-    else {
-        return NULL;
+        // Verify duration
+        $seconds = 60 * 60 * $values[$name]['duration'];
+        if((time() - $values[$name]['time']) < $seconds) {
+            return $values[$name]['value'];
+        }
     }
 }
 
 // Save a value in cache with its name and a duration
 function set_cache_value($name, $value, $hours=2) {
-    $array = array(
-        $name => array(
-            'value' => $value,
-            'duration' => $hours,
-            'time' => time()
-        )
+    $values = array();
+    $json_data = read_file('cache/values.json');
+    if ($json_data) {
+        $values = json_decode($json_data, true);
+    }
+    $values[$name] = array(
+        'value' => $value,
+        'duration' => $hours,
+        'time' => time()
     );
-    file_put_contents('cache/values.json', json_encode($array));
+    file_put_contents('cache/values.json', json_encode($values));
 }
 
 function get_index_size($db) {

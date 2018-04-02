@@ -3,7 +3,7 @@ require_once('templates/header.php');
 
 // Get the user request
 
-$q = $search = trim(htmlspecialchars($_GET['q']));
+$q = $search = htmlspecialchars(trim($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 
@@ -101,12 +101,12 @@ if (!empty($words)) {
     $ids_array = array_keys($rank_results);
     $in = str_repeat('?,', $nb_results - 1) . '?';
 
-    $sql = "SELECT id, popularity, score, homepage FROM website WHERE id IN ($in)";
+    $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);
     $stmt->execute($ids_array);
     $criterias = $stmt->fetchAll();
 
-    // #2 Score, #3 Popularity
+    // #2 Score, #3 Popularity, #4 Homepage, #5 URL
     $rank_results2 = array();
 
     foreach ($criterias as $criteria) {
@@ -126,10 +126,17 @@ if (!empty($words)) {
 
         $popularity = $criteria['popularity'] * 0.05;
         $homepage = ($criteria['homepage'] == '1') ? 1 : 0;
+        $keyword_url = 0;
+        foreach ($keywords as $keyword) {
+            if (strpos($criteria['url'], $keyword) !== false) {
+                $keyword_url = 2;
+                break;
+            }
+        }
 
         $spam = ($rank_results2[$criteria['id']] > 1) ? true : false;
 
-        $rank_results2[$criteria['id']] += log($score + $homepage + $popularity);
+        $rank_results2[$criteria['id']] += $score + $popularity + $homepage + $keyword_url;
 
         if ($spam) {
             $rank_results2[$criteria['id']] /= 3;

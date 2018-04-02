@@ -23,7 +23,7 @@ function get_cache_value($name, $cache) {
 }
 
 // Save a value in cache with its name and a duration
-function set_cache_value($name, $value, $hours=2, $cache) {
+function set_cache_value($name, $value, $cache, $hours=2) {
     $values = array();
     $json_data = read_file('cache/' . $cache . '.json');
     if ($json_data) {

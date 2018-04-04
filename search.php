@@ -103,40 +103,40 @@ if (!empty($words)) {
     $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in)";
     $stmt = $db->prepare($sql);
     $stmt->execute($ids_array);
-    $criterias = $stmt->fetchAll();
+    $websites = $stmt->fetchAll();
 
     // #2 Score, #3 Popularity, #4 Homepage, #5 URL
     $rank_results2 = array();
 
-    foreach ($criterias as $criteria) {
-        $rank_results2[$criteria['id']] = $rank_results[$criteria['id']];
+    foreach ($websites as $website) {
+        $rank_results2[$website['id']] = $rank_results[$website['id']];
 
-        $score = $criteria['score'] / 4;
-        $popularity = $criteria['popularity'] * 0.05;
+        $score = $website['score'] / 4;
+        $popularity = $website['popularity'] * 0.05;
         $homepage = 0;
-        if ($nb_keywords == 1 && $criteria['homepage'] == '1') {
+        if ($nb_keywords == 1 && $website['homepage'] == '1') {
             $homepage = 1;
         }
         $keyword_url = 0;
         foreach ($keywords as $keyword) {
-            if (strpos($criteria['url'], $keyword) !== false) {
+            if (strpos($website['url'], $keyword) !== false) {
                 $keyword_url = 2;
                 break;
             }
         }
 
-        $spam = ($rank_results2[$criteria['id']] > 1) ? true : false;
+        $spam = ($rank_results2[$website['id']] > 1) ? true : false;
 
-        $rank_results2[$criteria['id']] += log($score + $popularity + $homepage + $keyword_url);
+        $rank_results2[$website['id']] += log($score + $popularity + $homepage + $keyword_url);
 
         if ($spam) {
-            $rank_results2[$criteria['id']] /= 3;
+            $rank_results2[$website['id']] /= 3;
         }
     }
 
     $nb_results = count($rank_results2); // Get the real number of results (after SQL query)
 
-    unset($rank_results); unset($criterias); unset($files); unset($words);
+    unset($rank_results); unset($websites); unset($files); unset($words);
 
     arsort($rank_results2); // Sort the results by their final score
 

@@ -10,69 +10,76 @@ $nb_keywords = count($keywords);
 
 // Find the files to read in the inverted index
 
-$files = array();
+if ($nb_keywords > 0) {
+    $files = array();
 
-foreach ($keywords as $keyword) {
-    $first_letter = mb_substr($keyword, 0, 1);
-    $second_letter = mb_substr($keyword, 1, 1);
-    $two_letters = $first_letter . $second_letter;
-
-    if (ctype_alpha($two_letters)) {
-        $file = strtoupper($first_letter) . '/' . $two_letters . $index_ext;
-    }
-    else {
-        if (ctype_lower($first_letter)) {
-            $file = strtoupper($first_letter) . '/' . $first_letter . '-sp' . $index_ext;
+    foreach ($keywords as $keyword) {
+        if (strlen($keyword) < $min_length_keyword) {
+            continue;
         }
-        elseif (ctype_lower($second_letter)) {
-            $file = 'SP/sp-' . $second_letter . $index_ext;
+        $first_letter = mb_substr($keyword, 0, 1);
+        $second_letter = mb_substr($keyword, 1, 1);
+        $two_letters = $first_letter . $second_letter;
+
+        if (ctype_alpha($two_letters)) {
+            $file = strtoupper($first_letter) . '/' . $two_letters . $index_ext;
         }
         else {
-            $file = 'SP/sp-sp' . $index_ext;
+            if (ctype_lower($first_letter)) {
+                $file = strtoupper($first_letter) . '/' . $first_letter . '-sp' . $index_ext;
+            }
+            elseif (ctype_lower($second_letter)) {
+                $file = 'SP/sp-' . $second_letter . $index_ext;
+            }
+            else {
+                $file = 'SP/sp-sp' . $index_ext;
+            }
         }
-    }
 
-    if (!in_array($file, $files)) {
-        $files[] = $file;
+        if (!in_array($file, $files)) {
+            $files[] = $file;
+        }
     }
 }
 
 // Read the inverted-index
 
-$words = array();
+if (isset($files) && !empty($files)) {
+    $words = array();
 
-// For each language folder (ex: en)
-foreach ($languages as $language) {
-    // For each file to open (ex: aa.sif)
-    foreach ($files as $file) {
-        $path = $index_folder . strtoupper($language) . '/' . $file;
-        if (file_exists($path)) {
-            $json = json_decode(file_get_contents($path), true);
-            // For each keyword of query
-            foreach ($keywords as $keyword) {
-                // If this keyword is in the inverted-index
-                if (isset($json[$keyword])) {
-                    if (!isset($words[$keyword]['nb_results'])) {
-                        $words[$keyword]['nb_results'] = 0;
-                    }
+    // For each language folder (ex: en)
+    foreach ($languages as $language) {
+        // For each file to open (ex: aa.sif)
+        foreach ($files as $file) {
+            $path = $index_folder . strtoupper($language) . '/' . $file;
+            if (file_exists($path)) {
+                $json = json_decode(file_get_contents($path), true);
+                // For each keyword of query
+                foreach ($keywords as $keyword) {
+                    // If this keyword is in the inverted-index
+                    if (isset($json[$keyword])) {
+                        if (!isset($words[$keyword]['nb_results'])) {
+                            $words[$keyword]['nb_results'] = 0;
+                        }
 
-                    // For each website
-                    foreach ($json[$keyword] as $id => $tf) {
-                        $words[$keyword]['results'][$id] = $tf;
-                        $words[$keyword]['nb_results'] += 1;
+                        // For each website
+                        foreach ($json[$keyword] as $id => $tf) {
+                            $words[$keyword]['results'][$id] = $tf;
+                            $words[$keyword]['nb_results'] += 1;
+                        }
                     }
                 }
             }
         }
     }
-}
-if (isset($json)) {
-    unset($json);
+    if (isset($json)) {
+        unset($json);
+    }
 }
 
 // Ranking
 
-if (!empty($words)) {
+if (isset($words) && !empty($words)) {
     // Get number of websites in our index
     $index_size = get_index_size($db);
 

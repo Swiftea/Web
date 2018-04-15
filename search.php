@@ -99,7 +99,7 @@ if (isset($words) && !empty($words)) {
         }
     }
 
-    $nb_results = count($rank_results); // Real number of results before limit results
+    $nb_results = count($rank_results);
 
     if ($nb_results > 0) {
         // Limit results to $max_results

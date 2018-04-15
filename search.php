@@ -188,6 +188,9 @@ if (isset($words) && !empty($words)) {
     <?php
     if (isset($results)) {
         $str = $nb_results > 1 ? 'résultats' : 'résultat';
+        if ($nb_results >= $max_results) {
+            $nb_results = '+' . $max_results;
+        }
         echo '<span class="nb-results">' . $nb_results . ' ' . $str . ' - en ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';
         foreach ($results as $result) {
             if (empty($result['favicon']) || !is_https($result['favicon'])) {

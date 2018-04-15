@@ -30,7 +30,7 @@
         <p>
             Le site web et la base de données sont stockés gratuitement chez l'hebérgeur PlanetHoster grâce à sa formule <a href="https://www.planethoster.net/fr/World-Lite">World Lite</a>.
         </p>
-    </DIV>
+    </div>
 </section>
 
 <?php require_once('templates/footer.php'); ?>

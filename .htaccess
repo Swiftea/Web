@@ -19,3 +19,7 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
     Order allow,deny
     Deny from all
 </Files>
+
+# Errors page
+
+ErrorDocument 404 /404.php

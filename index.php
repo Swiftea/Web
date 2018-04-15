@@ -5,7 +5,7 @@
 
     <form method="GET" action="search">
         <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus required>
-        <button type="submit"><i class="fas fa-search"></i> Rechercher</button>
+        <button type="submit" class="btn"><i class="fas fa-search"></i> Rechercher</button>
     </form>
 </section>
 

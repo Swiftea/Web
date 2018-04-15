@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: #f2f2f2;
+    color: $dark;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -37,12 +38,56 @@ body {
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.16);
 
+
     *:last-child {
         margin-bottom: 0;
     }
 
-    &:not(:last-child) {
+    &.card-50, &:not(:last-child) {
         margin-bottom: 20px;
+    }
+}
+
+.api-price {
+    padding: 0;
+    text-align: center;
+
+    h3 {
+        margin: 0;
+        padding: 20px 10px;
+        border-radius: 10px 10px 0 0;
+        background-color: $dark;
+        color: #fff;
+    }
+
+    ul {
+        margin: 0;
+
+        li {
+            list-style: none;
+        }
+
+        & > li {
+            padding: 15px;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid #ccc;
+            }
+
+            & > ul > li {
+                padding: 0;
+                list-style: none;
+
+                &:not(:last-child) {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+
+    .btn {
+        margin-top: 10px !important;
+        margin-bottom: 25px !important;
     }
 }
 
@@ -78,24 +123,6 @@ body {
 
         &:focus {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        }
-    }
-
-    button {
-        padding: 20px 30px;
-        border: none;
-        border-radius: 40px;
-        background-color: $blue;
-        color: #ffffff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-
-        svg {
-            margin-right: 5px;
-        }
-
-        &:hover {
-            background-color: darken($blue, 5);
         }
     }
 
@@ -261,19 +288,40 @@ body {
     }
 }
 
+.btn {
+    display: inline-block;
+    padding: 20px 30px;
+    border-radius: 40px;
+    background-color: $blue;
+    color: #fff;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: none;
+        background-color: darken($blue, 5);
+    }
+}
+
+h1, h2, h3, p, ul {
+    margin-bottom: 20px;
+}
+
 h1 {
     font-size: 36px;
-    margin-bottom: 20px;
 }
 
 h2 {
     font-size: 24px;
-    margin-bottom: 20px;
+}
+
+h3 {
+    font-size: 18px;
 }
 
 p, ul {
-    margin-bottom: 20px;
-    line-height: 1.4em;
+    line-height: 1.6em;
 
     a {
         text-decoration: underline;
@@ -290,6 +338,7 @@ p, ul {
 
 ul {
     margin-left: 40px;
+    margin-right: 40px;
 
     li {
         list-style-type: disc;
@@ -312,6 +361,10 @@ a {
 
 b {
     font-weight: bold;
+}
+
+svg {
+    margin-right: 5px;
 }
 
 .align-center {
@@ -344,6 +397,20 @@ b {
             form {
                 max-width: $max_results_width;
             }
+        }
+    }
+
+    .card {
+        &:not(:last-child) {
+            &.card-50 {
+                margin-right: 40px;
+            }
+        }
+
+        &.card-50 {
+            display: inline-block;
+            vertical-align: top;
+            width: calc(50% - 20px);
         }
     }
 }

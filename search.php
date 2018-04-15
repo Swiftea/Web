@@ -72,9 +72,6 @@ if (isset($files) && !empty($files)) {
             }
         }
     }
-    if (isset($json)) {
-        unset($json);
-    }
 }
 
 // Ranking
@@ -102,9 +99,15 @@ if (isset($words) && !empty($words)) {
         }
     }
 
-    $nb_results = count($rank_results);
+    $nb_results = count($rank_results); // Real number of results before limit results
 
     if ($nb_results > 0) {
+        // Limit results to $max_results
+        arsort($rank_results);
+
+        $rank_results = array_slice($rank_results, 0, $max_results, true);
+
+        $nb_results = count($rank_results);
         $ids_array = array_keys($rank_results);
         $in = str_repeat('?,', $nb_results - 1) . '?';
 
@@ -143,9 +146,7 @@ if (isset($words) && !empty($words)) {
         }
     }
 
-    unset($rank_results); unset($websites); unset($files); unset($words);
-
-    $nb_results = count($rank_results2); // Get the real number of results (after SQL query)
+    $nb_results = count($rank_results2); // Real number of results (after SQL query)
 
     if ($nb_results > 0) {
         arsort($rank_results2); // Sort the results by their final score
@@ -163,12 +164,8 @@ if (isset($words) && !empty($words)) {
 
         $first_site = ($page - 1) * $max_results_per_page;
         $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
-        if ($nb_results > $max_results_per_page) {
-            $in = str_repeat('?,', $max_results_per_page - 1) . '?';
-        }
-        else {
-            $in = str_repeat('?,', $nb_results - 1) . '?';
-        }
+        $nb_ids = count($final_ids_array);
+        $in = str_repeat('?,', $nb_ids - 1) . '?';
 
         // Get final results
 

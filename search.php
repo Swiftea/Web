@@ -104,75 +104,79 @@ if (isset($words) && !empty($words)) {
 
     $nb_results = count($rank_results);
 
-    $ids_array = array_keys($rank_results);
-    $in = str_repeat('?,', $nb_results - 1) . '?';
+    if ($nb_results > 0) {
+        $ids_array = array_keys($rank_results);
+        $in = str_repeat('?,', $nb_results - 1) . '?';
 
-    $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in)";
-    $stmt = $db->prepare($sql);
-    $stmt->execute($ids_array);
-    $websites = $stmt->fetchAll();
+        $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($ids_array);
+        $websites = $stmt->fetchAll();
 
-    // #2 Score, #3 Popularity, #4 Homepage, #5 URL
-    $rank_results2 = array();
+        // #2 Score, #3 Popularity, #4 Homepage, #5 URL
+        $rank_results2 = array();
 
-    foreach ($websites as $website) {
-        $rank_results2[$website['id']] = $rank_results[$website['id']];
+        foreach ($websites as $website) {
+            $rank_results2[$website['id']] = $rank_results[$website['id']];
 
-        $score = $website['score'] / 4;
-        $popularity = $website['popularity'] * 0.05;
-        $homepage = 0;
-        if ($nb_keywords == 1 && $website['homepage'] == '1') {
-            $homepage = 1;
-        }
-        $keyword_url = 0;
-        foreach ($keywords as $keyword) {
-            if (strpos($website['url'], $keyword) !== false) {
-                $keyword_url = 2;
-                break;
+            $score = $website['score'] / 4;
+            $popularity = $website['popularity'] * 0.05;
+            $homepage = 0;
+            if ($nb_keywords == 1 && $website['homepage'] == '1') {
+                $homepage = 1;
+            }
+            $keyword_url = 0;
+            foreach ($keywords as $keyword) {
+                if (strpos($website['url'], $keyword) !== false) {
+                    $keyword_url = 2;
+                    break;
+                }
+            }
+
+            $spam = ($rank_results2[$website['id']] > 1) ? true : false;
+
+            $rank_results2[$website['id']] += log($score + $popularity + $homepage + $keyword_url);
+
+            if ($spam) {
+                $rank_results2[$website['id']] /= 3;
             }
         }
-
-        $spam = ($rank_results2[$website['id']] > 1) ? true : false;
-
-        $rank_results2[$website['id']] += log($score + $popularity + $homepage + $keyword_url);
-
-        if ($spam) {
-            $rank_results2[$website['id']] /= 3;
-        }
     }
-
-    $nb_results = count($rank_results2); // Get the real number of results (after SQL query)
 
     unset($rank_results); unset($websites); unset($files); unset($words);
 
-    arsort($rank_results2); // Sort the results by their final score
+    $nb_results = count($rank_results2); // Get the real number of results (after SQL query)
 
-    $ids_array = array_keys($rank_results2);
+    if ($nb_results > 0) {
+        arsort($rank_results2); // Sort the results by their final score
 
-    // Pagination
+        $ids_array = array_keys($rank_results2);
 
-    $pages = ceil($nb_results / $max_results_per_page);
+        // Pagination
 
-    $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;
-    if ($page < 1 || $page > $pages) {
-        $page = 1;
+        $pages = ceil($nb_results / $max_results_per_page);
+
+        $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;
+        if ($page < 1 || $page > $pages) {
+            $page = 1;
+        }
+
+        $first_site = ($page - 1) * $max_results_per_page;
+        $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
+        if ($nb_results > $max_results_per_page) {
+            $in = str_repeat('?,', $max_results_per_page - 1) . '?';
+        }
+        else {
+            $in = str_repeat('?,', $nb_results - 1) . '?';
+        }
+
+        // Get final results
+
+        $sql = "SELECT title, description, url, favicon FROM website WHERE id IN ($in)";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($final_ids_array);
+        $results = $stmt->fetchAll();
     }
-
-    $first_site = ($page - 1) * $max_results_per_page;
-    $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
-    if ($nb_results > $max_results_per_page) {
-        $in = str_repeat('?,', $max_results_per_page - 1) . '?';
-    }
-    else {
-        $in = str_repeat('?,', $nb_results - 1) . '?';
-    }
-
-    // Get final results
-
-    $sql = "SELECT title, description, url, favicon FROM website WHERE id IN ($in)";
-    $stmt = $db->prepare($sql);
-    $stmt->execute($final_ids_array);
-    $results = $stmt->fetchAll();
 }
 ?>
 

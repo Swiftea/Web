@@ -107,9 +107,9 @@ if (isset($words) && !empty($words)) {
 
         $rank_results = array_slice($rank_results, 0, $max_results, true);
 
-        $nb_results = count($rank_results);
+        $real_nb_results = count($rank_results);
         $ids_array = array_keys($rank_results);
-        $in = str_repeat('?,', $nb_results - 1) . '?';
+        $in = str_repeat('?,', $real_nb_results - 1) . '?';
 
         $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in)";
         $stmt = $db->prepare($sql);
@@ -188,7 +188,7 @@ if (isset($words) && !empty($words)) {
     <?php
     if (isset($results)) {
         $str = $nb_results > 1 ? 'résultats' : 'résultat';
-        if ($nb_results >= $max_results) {
+        if ($real_nb_results >= $max_results) {
             $nb_results = '+' . $max_results;
         }
         echo '<span class="nb-results">' . $nb_results . ' ' . $str . ' - en ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';

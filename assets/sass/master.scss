@@ -56,12 +56,19 @@ body {
         margin: 0;
         padding: 20px 10px;
         border-radius: 10px 10px 0 0;
-        background-color: $dark;
+        background-color: #f4f4f4;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    &.api-premium h3 {
+        background-color: $blue;
         color: #fff;
     }
 
     ul {
         margin: 0;
+        padding: 0 20px;
 
         li {
             list-style: none;
@@ -71,7 +78,7 @@ body {
             padding: 15px;
 
             &:not(:last-child) {
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid #e6e6e6;
             }
 
             & > ul > li {
@@ -306,6 +313,10 @@ body {
 
 h1, h2, h3, p, ul {
     margin-bottom: 20px;
+}
+
+pre {
+    margin-bottom: 20px !important;
 }
 
 h1 {

@@ -6,7 +6,21 @@ require_once('functions.php');
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Swiftea - Moteur de recherche open source</title>
+        <?php
+        if (basename($_SERVER['PHP_SELF'], '.php') == 'index') {
+            echo '<title>Swiftea - Moteur de recherche open source</title>';
+        }
+        else {
+            if (!isset($title)) {
+                $title = '';
+            }
+            else {
+                $title .= ' - ';
+            }
+            echo '<title>' . $title . 'Swiftea</title>';
+        }
+        ?>
+        <meta name="description" content="Swiftea est un moteur de recherche open-source. ">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="assets/css/master.css">
         <link rel="stylesheet" href="assets/css/prism.css">

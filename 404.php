@@ -1,4 +1,7 @@
-<?php require_once('templates/header.php'); ?>
+<?php
+$title = 'Erreur 404';
+require_once('templates/header.php');
+?>
 
 <section class="page">
     <h1>Erreur 404</h1>

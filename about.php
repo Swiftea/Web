@@ -1,4 +1,7 @@
-<?php require_once('templates/header.php'); ?>
+<?php
+$title = 'À propos';
+require_once('templates/header.php');
+?>
 
 <section class="page">
     <h1>À propos</h1>

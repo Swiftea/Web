@@ -1,12 +1,13 @@
 <?php
-require_once('templates/header.php');
-
 // Get the user request
 
 $q = $search = htmlspecialchars(trim($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 $nb_keywords = count($keywords);
+
+$title = 'Recherche ' . $search;
+require_once('templates/header.php');
 
 // Find the files to read in the inverted index
 

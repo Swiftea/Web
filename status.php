@@ -1,4 +1,5 @@
 <?php
+$title = 'Statut';
 require_once('templates/header.php');
 ?>
 

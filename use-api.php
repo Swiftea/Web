@@ -1,4 +1,7 @@
-<?php require_once('templates/header.php'); ?>
+<?php
+$title = 'API';
+require_once('templates/header.php');
+?>
 
 <section class="page">
     <h1>API</h1>

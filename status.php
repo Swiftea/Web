@@ -13,12 +13,12 @@ require_once('templates/header.php');
 
     <h2>Données</h2>
     <div class="card">
-        <p>Nombre de pages web indexées : <b><?php echo get_index_size($db); ?></b></p>
+        <p>Nombre de pages web indexées : <b><?php echo number_format(get_index_size($db), 0, ',', ' '); ?></b></p>
         <p>Nombre de pages web indexées par langue :</p>
         <ul>
             <?php
             foreach ($languages as $language) {
-                echo '<li>' . $language . ' : <b>' . get_index_size($db, $language) . '</b></li>';
+                echo '<li>' . $language . ' : <b>' . number_format(get_index_size($db, $language), 0, ',', ' ') . '</b></li>';
             }
             ?>
         </ul>

@@ -68,28 +68,22 @@ body {
 
     ul {
         margin: 0;
-        padding: 0 20px;
+        padding: 20px;
 
         li {
             list-style: none;
-        }
 
-        & > li {
-            padding: 15px;
-
-            &:not(:last-child) {
-                border-bottom: 1px solid #e6e6e6;
-            }
-
-            & > ul > li {
+            ul {
                 padding: 0;
-                list-style: none;
-
-                &:not(:last-child) {
-                    border-bottom: none;
-                }
             }
         }
+    }
+
+    .separator {
+        margin: 15px auto;
+        width: 80%;
+        height: 1px;
+        background-color: #e6e6e6;
     }
 
     .btn {

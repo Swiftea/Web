@@ -5,7 +5,7 @@ require_once('templates/header.php');
 
 <section class="page">
     <h1>API</h1>
-    <p>Nous mettons à votre disposition notre base de données de plus de <b><?php echo floor(get_index_size($db) / 100) * 100; ?> pages</b> différentes.</p>
+    <p>Nous mettons à votre disposition notre base de données de plus de <b><?php echo number_format(floor(get_index_size($db) / 100) * 100, 0, ',', ' '); ?> pages</b> différentes.</p>
 
     <h2>À quoi sert cette API ?</h2>
     <div class="card">
@@ -18,6 +18,7 @@ require_once('templates/header.php');
             <h3><i class="fas fa-flag"></i> Start - 0€</h3>
             <ul>
                 <li>100 requêtes par jour</li>
+                <div class="separator"></div>
                 <li>
                     Accès aux données suivantes :
                     <ul>
@@ -26,6 +27,7 @@ require_once('templates/header.php');
                         <li>URL du favicon</li>
                     </ul>
                 </li>
+                <div class="separator"></div>
                 <li>Une langue disponible au choix</li>
             </ul>
             <a href="#start" class="btn"><i class="fas fa-code"></i> Essayer</a>
@@ -33,6 +35,7 @@ require_once('templates/header.php');
             <h3><i class="fas fa-space-shuttle"></i> Premium</h3>
             <ul>
                 <li>10 000 requêtes par jour</li>
+                <div class="separator"></div>
                 <li>
                     Accès aux données suivantes :
                     <ul>
@@ -44,6 +47,7 @@ require_once('templates/header.php');
                         <li>Dates du premier et du dernier crawl</li>
                     </ul>
                 </li>
+                <div class="separator"></div>
                 <li>Toutes les langues supportées par Swiftea</li>
             </ul>
             <a href="#" class="btn"><i class="fas fa-shopping-cart"></i> Bientôt disponible</a>

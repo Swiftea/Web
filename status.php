@@ -18,7 +18,7 @@ require_once('templates/header.php');
         <ul>
             <?php
             foreach ($languages as $language) {
-                echo '<li>' . $language . ' : <b>' . number_format(get_index_size($db, $language), 0, ',', ' ') . '</b></li>';
+                echo '<li>' . strtoupper($language) . ' : <b>' . number_format(get_index_size($db, $language), 0, ',', ' ') . '</b></li>';
             }
             ?>
         </ul>

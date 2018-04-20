@@ -1,12 +1,24 @@
-<?php require_once('templates/header.php'); ?>
+<?php
+require_once('config.php');
+require_once('functions.php');
 
-<section id="search">
-    <a href="<?php echo get_base_url(); ?>" id="logo"><img src="assets/img/logo-241x75.png" alt="Swiftea"></a>
+// Get page
+if(isset($_GET['p']) && !empty($_GET['p'])) {
+    $tmp_page = htmlspecialchars($_GET['p']);
+    if(file_exists('pages/' . $tmp_page . '.php')) {
+        $page = $tmp_page;
+    }
+    else {
+        $page = '404';
+        header('Status: 404 Not Found');
+    }
+}
+else {
+    $page = 'home';
+}
 
-    <form method="GET" action="search">
-        <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus required>
-        <button type="submit" class="btn"><i class="fas fa-search"></i> Rechercher</button>
-    </form>
-</section>
-
-<?php require_once('templates/footer.php'); ?>
+// Call $page
+require_once('templates/header.php');
+require_once('pages/' . $page . '.php');
+require_once('templates/footer.php');
+?>

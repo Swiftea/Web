@@ -7,11 +7,11 @@ RewriteCond %{HTTPS} !=on
 RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Remove the .php extension of pages
+# Rewrite --- about => index.php?p=about
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^(.+)$ index.php?p=$1 [L,QSA]
 
 # Don't allow access to the htaccess file
 
@@ -19,7 +19,3 @@ RewriteRule ^([^\.]+)$ $1.php [NC,L]
     Order allow,deny
     Deny from all
 </Files>
-
-# Errors page
-
-ErrorDocument 404 /404.php

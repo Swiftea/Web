@@ -7,11 +7,11 @@ RewriteCond %{HTTPS} !=on
 RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# Rewrite --- about => index.php?p=about
+# Rewrite --- about => index.php?page=about
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.+)$ index.php?p=$1 [L,QSA]
+RewriteRule ^(.+)$ index.php?page=$1 [L,QSA]
 
 # Don't allow access to the htaccess file
 

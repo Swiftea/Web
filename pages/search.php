@@ -190,12 +190,12 @@ if (isset($words) && !empty($words)) {
     if (isset($results)) {
         $str = $nb_results > 1 ? 'résultats' : 'résultat';
         if ($real_nb_results >= $max_results) {
-            $nb_results = '+' . number_format($max_results, 0, ',', ' ');
+            $nb_results_str = '+' . number_format($max_results, 0, ',', ' ');
         }
         else {
-            $nb_results = number_format($nb_results, 0, ',', ' ');
+            $nb_results_str = number_format($nb_results, 0, ',', ' ');
         }
-        echo '<span class="nb-results">' . $nb_results . ' ' . $str . ' - en ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';
+        echo '<span class="nb-results">' . $nb_results_str . ' ' . $str . ' - en ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';
         foreach ($results as $result) {
             if (empty($result['favicon']) || !is_https($result['favicon'])) {
                 $result['favicon'] = 'assets/img/default-favicon.png';

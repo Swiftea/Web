@@ -4,11 +4,9 @@ require_once('functions.php');
 header('Content-Type: application/json');
 
 // Get the user IP
-
 $ip = get_ip();
 
 // Verify permission to access the data
-
 $sql = "SELECT nb_access, last_access FROM api WHERE user_ip = :user_ip";
 $stmt = $db->prepare($sql);
 $stmt->execute(array(':user_ip' => $ip));
@@ -44,28 +42,26 @@ else {
 }
 
 if (!$block) {
-    // Increment the number of access
-    $nb_access += 1;
-    $sql = "UPDATE api SET nb_access = :nb_access, last_access = UNIX_TIMESTAMP() WHERE user_ip = :user_ip";
-    $stmt = $db->prepare($sql);
-    $stmt->bindParam(':nb_access', $nb_access, PDO::PARAM_INT);
-    $stmt->bindParam(':user_ip', $ip);
-    $stmt->execute();
-
-    // Get the user request
-
     $data = array();
-
+    // Get the user request
     if (isset($_GET['url']) && !empty($_GET['url'])) {
-        $url = htmlspecialchars(trim($_GET['url']));
+        // Increment the number of access
+        $nb_access += 1;
+        $sql = "UPDATE api SET nb_access = :nb_access, last_access = UNIX_TIMESTAMP() WHERE user_ip = :user_ip";
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':nb_access', $nb_access, PDO::PARAM_INT);
+        $stmt->bindParam(':user_ip', $ip);
+        $stmt->execute();
 
+        // Return data associated with the request
+        $url = htmlspecialchars(trim($_GET['url']));
         $sql = "SELECT title, description, favicon FROM website WHERE url = :url";
         $stmt = $db->prepare($sql);
         $stmt->execute(array(':url' => $url));
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (empty($data)) {
-            $data['error'] = 'Nothing for this url';
+            $data['error'] = 'Any data associated to this url';
         }
     }
     else {
@@ -73,7 +69,7 @@ if (!$block) {
     }
 }
 else {
-    $data['error'] = 'You have to wait for reusing the API or upgrade your current plan with the premium option';
+    $data['error'] = 'You have to wait for reusing the API or upgrade your current plan with the premium one';
 }
 
 echo json_encode($data);

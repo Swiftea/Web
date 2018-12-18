@@ -21,8 +21,7 @@
         <link rel="stylesheet" href="assets/css/master.css">
         <link rel="stylesheet" href="assets/css/prism.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/solid.js" integrity="sha384-Q7KAHqDd5trmfsv85beYZBsUmw0lsreFBQZfsEhzUtUn5HhpjVzwY0Aq4z8DY9sA" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/fontawesome.js" integrity="sha384-M2FSA4xMm1G9m4CNXM49UcDHeWcDZNucAlz1WVHxohug0Uw1K+IpUhp/Wjg0y6qG" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
         <link rel="icon" type="image/png" href="assets/img/icon-256x256-dark-round.png">
         <link rel="search" type="application/opensearchdescription+xml" title="Swiftea" href="swiftea.xml">
     <body>

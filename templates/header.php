@@ -3,18 +3,13 @@
     <head>
         <meta charset="utf-8">
         <?php
-        if (basename($_SERVER['PHP_SELF'], '.php') == 'index') {
-            echo '<title>Swiftea - Open Source Database and API of the web</title>';
+        if (!isset($title)) {
+            $title = '';
         }
         else {
-            if (!isset($title)) {
-                $title = '';
-            }
-            else {
-                $title .= ' - ';
-            }
-            echo '<title>' . $title . 'Swiftea</title>';
+            $title .= ' - ';
         }
+        echo '<title>' . $title . 'Swiftea</title>';
         ?>
         <meta name="description" content="Get data on many websites for your needs by using our free and open-source database of thousands of websites with the help of our API.">
         <meta name="viewport" content="width=device-width, initial-scale=1">

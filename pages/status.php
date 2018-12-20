@@ -14,7 +14,7 @@ require_once('templates/header.php');
     <h2>Data</h2>
     <div class="card">
         <p>Number of indexed webpages: <b><?php echo number_format(get_index_size($db), 0, ',', ' '); ?></b></p>
-        <p>Number of indexed webpages by language :</p>
+        <p>Number of indexed webpages by language:</p>
         <ul>
             <?php
             foreach ($languages as $language) {

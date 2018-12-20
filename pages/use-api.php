@@ -30,7 +30,7 @@ require_once('templates/header.php');
                 <div class="separator"></div>
                 <li>One language</li>
             </ul>
-            <a href="#start" class="btn"><i class="fas fa-code"></i> Essayer</a>
+            <a href="#starter" class="btn"><i class="fas fa-code"></i> Try</a>
         </div><div class="card card-50 api-price api-premium">
             <h3><i class="fas fa-space-shuttle"></i> Premium</h3>
             <ul>
@@ -55,7 +55,7 @@ require_once('templates/header.php');
     </div>
 
     <h2>How to use the Starter API?</h2>
-    <div id="start" class="card">
+    <div id="starter" class="card">
         <h3>Step 1</h3>
         <p>Call this URL <code class="language-markup"><?php echo get_base_url(); ?>api.php?url=</code> with your URL in parameter.<br><br>
         For example:<br>

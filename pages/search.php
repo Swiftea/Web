@@ -6,7 +6,7 @@ $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 $nb_keywords = count($keywords);
 
-$title = 'Recherche ' . $search;
+$title = 'Search - ' . $search;
 require_once('templates/header.php');
 
 // Find the files to read in the inverted index
@@ -180,7 +180,7 @@ if (isset($words) && !empty($words)) {
 
 <section id="search" class="search-inline">
     <form method="GET" action="search">
-        <input type="search" name="q" placeholder="Votre recherche..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v" required>
+        <input type="search" name="q" placeholder="Your search..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v" required>
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>
 </section>
@@ -188,7 +188,7 @@ if (isset($words) && !empty($words)) {
 <section id="results">
     <?php
     if (isset($results)) {
-        $str = $nb_results > 1 ? 'résultats' : 'résultat';
+        $str = $nb_results > 1 ? 'results' : 'result';
         if ($real_nb_results >= $max_results) {
             $nb_results_str = '+' . number_format($max_results, 0, ',', ' ');
         }
@@ -212,7 +212,7 @@ if (isset($words) && !empty($words)) {
         }
     }
     else {
-        echo '<span class="nb-results">Aucun résultat...</span>';
+        echo '<span class="nb-results">Any result...</span>';
     }
     ?>
 </section>
@@ -232,7 +232,7 @@ if (isset($results) && $nb_results > $max_results_per_page) {
             }
             echo '<li class="disabled"><span>Page ' . $page . '</span></li>';
             if ($page < $pages) {
-                echo '<li><a href="' . $url . ($page + 1) . '">Suivante <i class="fas fa-angle-right"></i></a></li>';
+                echo '<li><a href="' . $url . ($page + 1) . '">Next <i class="fas fa-angle-right"></i></a></li>';
             }
             ?>
         </ul>

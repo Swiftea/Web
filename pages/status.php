@@ -1,5 +1,5 @@
 <?php
-$title = 'Statut';
+$title = 'Status';
 require_once('templates/header.php');
 ?>
 
@@ -11,10 +11,10 @@ require_once('templates/header.php');
         <p>HTTPS : <i class="fas fa-<?php echo is_https(get_base_url()) ? 'check' : 'times'; ?>"></i></p>
     </div>
 
-    <h2>Données</h2>
+    <h2>Data</h2>
     <div class="card">
-        <p>Nombre de pages web indexées : <b><?php echo number_format(get_index_size($db), 0, ',', ' '); ?></b></p>
-        <p>Nombre de pages web indexées par langue :</p>
+        <p>Number of indexed webpages: <b><?php echo number_format(get_index_size($db), 0, ',', ' '); ?></b></p>
+        <p>Number of indexed webpages by language :</p>
         <ul>
             <?php
             foreach ($languages as $language) {

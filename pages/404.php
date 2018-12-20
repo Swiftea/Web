@@ -4,12 +4,12 @@ require_once('templates/header.php');
 ?>
 
 <section class="page">
-    <h1>Erreur 404</h1>
+    <h1>Error 404</h1>
 
     <div class="card align-center">
-        <h2>Cette page n'existe pas...</h2>
+        <h2>This page doesn't exist...</h2>
 
-        <p>Pas d'inquiétude, vous pouvez revenir à <a href="<?php echo get_base_url(); ?>">l'accueil</a>.</p>
+        <p>Don't worry, you can return to the <a href="<?php echo get_base_url(); ?>">homepage</a>.</p>
 
         <img src="assets/img/404.gif" alt="">
     </div>

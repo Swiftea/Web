@@ -2,11 +2,11 @@
     <footer id="footer">
         <ul>
             <li><a href="use-api">API</a></li>
-            <li><a href="status">Statut</a></li>
-            <li><a href="about">À propos</a></li>
+            <li><a href="status">Status</a></li>
+            <li><a href="about">About</a></li>
         </ul>
         <ul>
-            <li>Version dev</li>
+            <li>Dev version</li>
         </ul>
     </footer>
     <script src="assets/js/prism.js"></script>

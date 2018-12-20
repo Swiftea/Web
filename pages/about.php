@@ -1,37 +1,37 @@
 <?php
-$title = 'À propos';
+$title = 'About';
 require_once('templates/header.php');
 ?>
 
 <section class="page">
-    <h1>À propos</h1>
-    <p>Swiftea est un moteur de recherche open-source développé par <a href="https://github.com/Thykof">Nathan Seva</a> et <a href="https://hugo-posnic.fr">Hugo Posnic</a> dans un but éducatif.</p>
+    <h1>About</h1>
+    <p>Swiftea is an open-source search engine developed by  <a href="https://github.com/Thykof">Nathan Seva</a> et <a href="https://hugo-posnic.fr">Hugo Posnic</a> for educational purpose.</p>
 
     <h2>Open Source</h2>
     <div class="card">
         <p>
-            Le code source est disponible <a href="https://github.com/Swiftea">sur GitHub</a> sous licence GNU GPL v3. Il fonctionne grâce à deux programmes :
+            Source code is available <a href="https://github.com/Swiftea">on GitHub</a> under the GNU GPL v3 license. It works through two programs:
         </p>
         <ul>
-            <li><a href="https://github.com/Swiftea/Crawler">Crawler</a> : il parcoure le web afin de connaître un maximum de pages web. Il est codé en Python.</li>
-            <li><a href="https://github.com/Swiftea/Web">Web</a> : il s'agit de l'interface qui vous présente les résultats de vos recherches. Elle est écrite en PHP.</li>
+            <li><a href="https://github.com/Swiftea/Crawler">Crawler</a>: it browses the web to know a maximum of webpages. It is coded in Python.</li>
+            <li><a href="https://github.com/Swiftea/Web">Web</a>: this is the interface that shows you the results of your research. It is written in PHP.</li>
         </ul>
     </div>
-    <h2>Classement des résultats</h2>
+    <h2>Ranking</h2>
     <div class="card">
-        <p>Les résultats que vous voyez apparaitre lorsque vous effectuez une recherche sont classés selon plusieurs critères :</p>
+        <p>The results you see when you perform a search are classified according to several criteria:</p>
         <ul>
-            <li>La méthode <a href="https://fr.wikipedia.org/wiki/TF-IDF">TF-IDF</a></li>
-            <li>Un score calculé de manière unique pour chaque page</li>
-            <li>Un indice de popularité mesuré par le crawler</li>
-            <li>Les mots-clés dans l'adresse de chaque page</li>
+            <li><a href="https://en.wikipedia.org/wiki/Tf–idf">TF-IDF</a> method</li>
+            <li>A score calculated uniquely for each page</li>
+            <li>A popularity index measured by the crawler</li>
+            <li>The keywords in the address of each page</li>
         </ul>
-        <p>Si une page abuse de l'utilisation de mots-clés optimisés, elle se voit pénalisée dans les résultats.</p>
+        <p>If a page abuses the use of optimized keywords, it is penalized in the results.</p>
     </div>
-    <h2>Hébérgement</h2>
+    <h2>Hosting</h2>
     <div class="card">
         <p>
-            Le site web et la base de données sont stockés gratuitement chez l'hebérgeur PlanetHoster grâce à sa formule <a href="https://www.planethoster.net/fr/World-Lite">World Lite</a>.
+            The website and the database are stored free of charge at PlanetHoster thanks to its <a href="https://www.planethoster.net/fr/World-Lite">World Lite</a> formula.
         </p>
     </div>
 </section>

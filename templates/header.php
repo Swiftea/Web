@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <?php
         if (basename($_SERVER['PHP_SELF'], '.php') == 'index') {
-            echo '<title>Swiftea - Moteur de recherche open source</title>';
+            echo '<title>Swiftea - Open Source Database and API of the web</title>';
         }
         else {
             if (!isset($title)) {
@@ -16,7 +16,7 @@
             echo '<title>' . $title . 'Swiftea</title>';
         }
         ?>
-        <meta name="description" content="Swiftea est un moteur de recherche open-source. ">
+        <meta name="description" content="Get data on many websites for your needs by using our free and open-source database of thousands of websites with the help of our API.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="assets/css/master.css">
         <link rel="stylesheet" href="assets/css/prism.css">

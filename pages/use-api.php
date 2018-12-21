@@ -17,7 +17,7 @@ require_once('templates/header.php');
         <div class="card card-50 api-price">
             <h3><i class="fas fa-flag"></i> Starter - 0€</h3>
             <ul>
-                <li>100 requests per day</li>
+                <li>1 000 requests per day</li>
                 <div class="separator"></div>
                 <li>
                     Access to this data:
@@ -30,11 +30,11 @@ require_once('templates/header.php');
                 <div class="separator"></div>
                 <li>One language</li>
             </ul>
-            <a href="#starter" class="btn"><i class="fas fa-code"></i> Try</a>
+            <a href="#starter" class="btn"><i class="fas fa-code"></i> Try now</a>
         </div><div class="card card-50 api-price api-premium">
             <h3><i class="fas fa-space-shuttle"></i> Premium</h3>
             <ul>
-                <li>10 000 requests per day</li>
+                <li>100 000 requests per day</li>
                 <div class="separator"></div>
                 <li>
                     Access to this data:

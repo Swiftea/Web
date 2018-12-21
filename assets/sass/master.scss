@@ -64,7 +64,7 @@ body {
 
     &.api-premium h3 {
         background-color: $blue;
-        color: #fff;
+        color: #ffffff;
     }
 
     ul {
@@ -222,7 +222,7 @@ body {
 
     li {
         display: inline-block;
-        background-color: #fff;
+        background-color: #ffffff;
         list-style: none;
 
         a, span {
@@ -236,7 +236,7 @@ body {
 
         &.active {
             background-color: $blue;
-            color: #fff;
+            color: #ffffff;
 
             &:hover {
                 background-color: $blue;
@@ -270,22 +270,31 @@ body {
 
     li {
         display: inline-block;
+        list-style: none;
+        color: #828282;
+
+        a {
+            display: block;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &.featured {
+            border-radius: 4px;
+            background: $blue;
+            color: #ffffff;
+            font-weight: bold;
+
+            a {
+                padding: 2px 15px;
+            }
+        }
 
         &:not(:last-child) {
             margin-right: 10px;
-        }
-    }
-
-    li, a {
-        list-style: none;
-        color: #828282;
-    }
-
-    a {
-        text-decoration: none;
-
-        &:hover {
-            text-decoration: underline;
         }
     }
 }
@@ -295,7 +304,7 @@ body {
     padding: 20px 30px;
     border-radius: 40px;
     background-color: $blue;
-    color: #fff;
+    color: #ffffff;
     transition: background-color 0.3s;
     border: none;
     cursor: pointer;

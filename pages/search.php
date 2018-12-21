@@ -6,7 +6,7 @@ $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 $nb_keywords = count($keywords);
 
-$title = 'Search - ' . $search;
+$title = 'Search | ' . $search;
 require_once('templates/header.php');
 
 // Find the files to read in the inverted index

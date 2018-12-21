@@ -1,5 +1,5 @@
 <?php
-$title = 'Open Source Database and API of the web';
+$title = 'Open Source Database of the web';
 require_once('templates/header.php');
 ?>
 

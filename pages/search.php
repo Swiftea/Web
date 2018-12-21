@@ -195,7 +195,7 @@ if (isset($words) && !empty($words)) {
         else {
             $nb_results_str = number_format($nb_results, 0, ',', ' ');
         }
-        echo '<span class="nb-results">' . $nb_results_str . ' ' . $str . ' - en ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';
+        echo '<span class="nb-results">' . $nb_results_str . ' ' . $str . ' - in ' . round(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 2) . 's</span>';
         foreach ($results as $result) {
             if (empty($result['favicon']) || !is_https($result['favicon'])) {
                 $result['favicon'] = 'assets/img/default-favicon.png';

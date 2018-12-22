@@ -35,6 +35,10 @@ function set_cache_value($name, $value, $cache, $hours=2) {
         'duration' => $hours,
         'time' => time()
     );
+    if (!is_dir('cache')) {
+        // dir doesn't exist, make it
+        mkdir('cache');
+    }
     file_put_contents('cache/' . $cache . '.json', json_encode($values));
 }
 

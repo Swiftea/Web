@@ -1,12 +1,6 @@
 RewriteEngine On
 Options -Indexes
 
-# Force https
-
-RewriteCond %{HTTPS} !=on
-RewriteCond %{REMOTE_ADDR} !^127\.0\.0\.1$
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
 # Rewrite --- about => index.php?page=about
 
 RewriteCond %{REQUEST_FILENAME} !-f

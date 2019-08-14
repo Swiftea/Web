@@ -3,9 +3,9 @@
   <ShortName>Swiftea</ShortName>
   <Description>Swiftea est  un moteur de recherche open-source.</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Image width="16" height="16" type="image/png">https://swiftea.yo.fr/assets/img/icon-256x256-dark-round.png</Image>
-  <Url type="text/html" template="https://swiftea.yo.fr/search">
+  <Image width="16" height="16" type="image/png">https://swifteasearch.alwaysdata.net/assets/img/icon-256x256-dark-round.png</Image>
+  <Url type="text/html" template="https://swifteasearch.alwaysdata.net/search">
     <Param name="q" value="{searchTerms}"/>
   </Url>
-  <moz:SearchForm>https://swiftea.yo.fr</moz:SearchForm>
+  <moz:SearchForm>https://swifteasearch.alwaysdata.net</moz:SearchForm>
 </OpenSearchDescription>

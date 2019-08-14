@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="assets/css/master.css">
         <link rel="stylesheet" href="assets/css/prism.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/95303e0f2f.js"></script>
         <link rel="icon" type="image/png" href="assets/img/icon-256x256-dark-round.png">
         <link rel="search" type="application/opensearchdescription+xml" title="Swiftea" href="swiftea.xml">
     <body>

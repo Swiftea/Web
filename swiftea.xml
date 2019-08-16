@@ -1,7 +1,7 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                        xmlns:moz="http://www.mozilla.org/2006/browser/search/">
   <ShortName>Swiftea</ShortName>
-  <Description>Swiftea est  un moteur de recherche open-source.</Description>
+  <Description>Open Source Database of the web</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="16" height="16" type="image/png">https://swifteasearch.alwaysdata.net/assets/img/icon-256x256-dark-round.png</Image>
   <Url type="text/html" template="https://swifteasearch.alwaysdata.net/search">

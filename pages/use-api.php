@@ -12,7 +12,7 @@ require_once('templates/header.php');
         <p>Our API allows you to access data on the webpages of your choice. You can use it to realize for example lists of sites, comparatives. You will be able to access the titles, descriptions, favicons and many other data of them.</p>
     </div>
 
-    <h2>Prix</h2>
+    <h2>Offer</h2>
     <div>
         <div class="card card-50 api-price">
             <h3><i class="fas fa-flag"></i> Starter - 0€</h3>
@@ -27,30 +27,8 @@ require_once('templates/header.php');
                         <li>Favicon URL</li>
                     </ul>
                 </li>
-                <div class="separator"></div>
-                <li>One language</li>
             </ul>
-            <a href="#starter" class="btn"><i class="fas fa-code"></i> Try now</a>
-        </div><div class="card card-50 api-price api-premium">
-            <h3><i class="fas fa-space-shuttle"></i> Premium</h3>
-            <ul>
-                <li>100 000 requests per day</li>
-                <div class="separator"></div>
-                <li>
-                    Access to this data:
-                    <ul>
-                        <li>Title</li>
-                        <li>Description</li>
-                        <li>Favicon URL</li>
-                        <li>SaneSearch Index</li>
-                        <li>Quality Score</li>
-                        <li>Dates of the first and the last crawl</li>
-                    </ul>
-                </li>
-                <div class="separator"></div>
-                <li>All languages supported by Swiftea</li>
-            </ul>
-            <a href="#" class="btn"><i class="fas fa-shopping-cart"></i> Coming soon</a>
+            <a href="#starter" class="btn"><i class="fas fa-code"></i> Try it now</a>
         </div>
     </div>
 

@@ -6,41 +6,14 @@ $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 $nb_keywords = count($keywords);
 
-$d = $domain = htmlspecialchars(trim($_GET['d']));
-$d = mb_strtolower($d);
+$domain = htmlspecialchars(trim($_GET['d']));
 
 $title = 'Internal search | ' . $search;
 require_once('templates/header.php');
+require_once('search-engine.php');
 
 // Perform search
-
-try {
-    $sql = "SELECT id, title, description, url, favicon FROM website WHERE domain = '" . $domain . "'";
-    $stm = $db->query($sql);
-    $results = $stm->fetchAll();
-}
-catch(PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-$nb_results = count($results);
-
-// Pagination
-if ($nb_results) {
-    $pages = ceil($nb_results / $max_results_per_page);
-    $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;
-    if ($page < 1 || $page > $pages) {
-        $page = 1;
-    }
-    $ids_array = array();
-    foreach ($results as $key => $value) {
-        array_push($ids_array, $value['id']);
-    }
-    $first_site = ($page - 1) * $max_results_per_page;
-    $final_ids_array = array_slice($ids_array, $first_site, $max_results_per_page);
-    $results = array_slice($results, $first_site, $max_results_per_page);
-    $nb_ids = count($final_ids_array);
-    $in = str_repeat('?,', $nb_ids - 1) . '?';
-}
+list($results, $nb_results, $real_nb_results) = search($keywords, $domain);
 
 ?>
 

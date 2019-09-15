@@ -127,7 +127,7 @@ function search($keywords, $domain) {
             $in = str_repeat('?,', $real_nb_results - 1) . '?';
 
             if ($domain !== '') {
-                $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in) AND domain = '$domain'";
+                $sql = "SELECT id, url, popularity, score, homepage FROM website w WHERE id IN ($in) AND w.domain LIKE '%$domain%'";
             }
             else {
                 $sql = "SELECT id, url, popularity, score, homepage FROM website WHERE id IN ($in)";

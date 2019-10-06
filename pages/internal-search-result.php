@@ -4,9 +4,14 @@
 $q = $search = htmlspecialchars(trim($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
-$nb_keywords = count($keywords);
 
 $domain = htmlspecialchars(trim($_GET['d']));
+
+// If domain is empty, then redirect to classic search
+if ($domain == '') {
+    header("Location: search?q=" . $q);
+    die();
+}
 
 $title = 'Internal search | ' . $search;
 require_once('templates/header.php');
@@ -35,7 +40,19 @@ function start_crawler($domain) {
 
 // Perform search
 start_crawler($domain);
-list($results, $nb_results, $real_nb_results) = search($keywords, $domain);
+if (count($keywords) == 1 && $keywords[0] == '') {
+    // send all page in the given domain
+    require('config.php');
+    require('db.php');
+    $sql = "SELECT id, url, popularity, score, homepage, title, description, favicon FROM website w WHERE w.domain LIKE '%$domain%'";
+    $stmt = $db->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll();
+    $nb_results = count($results);
+}
+else {
+    list($results, $nb_results, $real_nb_results) = search($keywords, $domain);
+}
 
 ?>
 

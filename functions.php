@@ -110,3 +110,11 @@ function get_ip() {
         return $_SERVER['REMOTE_ADDR'];
     }
 }
+
+function clean_domain($domain) {
+
+    if (substr($domain, 0, 7) !== "http://" && substr($domain, 0, 8) !== "https://" ) {
+        $domain = "http://" . $domain;
+    }
+    return parse_url($domain, PHP_URL_HOST);
+}

@@ -108,6 +108,8 @@ function search($keywords, $domain) {
     $results = array();
     $nb_results = 0;
     $real_nb_results = 0;
+    $pages = 1;
+    $page = 1;
 
     // Ranking
     if (isset($words) && !empty($words)) {
@@ -196,6 +198,6 @@ function search($keywords, $domain) {
         }
     }
 
-    return array($results, $nb_results, $real_nb_results);
+    return array($results, $nb_results, $real_nb_results, $pages, $page);
 }
 ?>

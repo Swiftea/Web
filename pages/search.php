@@ -10,7 +10,7 @@ require_once('templates/header.php');
 require_once('search-engine.php');
 
 // Perform search
-list($results, $nb_results, $real_nb_results) = search($keywords, '');
+list($results, $nb_results, $real_nb_results, $pages, $page) = search($keywords, '');
 ?>
 
 <section id="search" class="search-inline">

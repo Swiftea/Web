@@ -5,8 +5,7 @@ $q = $search = htmlspecialchars(trim($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 
-$domain = htmlspecialchars(trim($_GET['d']));
-
+$domain = clean_domain(htmlspecialchars(trim($_GET['d'])));
 // If domain is empty, then redirect to classic search
 if ($domain == '') {
     header("Location: search?q=" . $q);
@@ -49,9 +48,11 @@ if (count($keywords) == 1 && $keywords[0] == '') {
     $stmt->execute();
     $results = $stmt->fetchAll();
     $nb_results = count($results);
+    $pages = ceil($nb_results / $max_results_per_page);
+    $page = 1;
 }
 else {
-    list($results, $nb_results, $real_nb_results) = search($keywords, $domain);
+    list($results, $nb_results, $real_nb_results, $pages, $page) = search($keywords, $domain);
 }
 
 ?>
@@ -59,7 +60,7 @@ else {
 <section id="search" class="search-inline search-inline">
     <p>Search in this website: <?php echo $domain; ?></p>
     <form method="GET" action="internal-search-result">
-        <input type="search" name="q" placeholder="Your search..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v" required>
+        <input type="search" name="q" placeholder="Your search..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v">
         <input type="hidden" name="d" value="<?php echo $_GET['d']; ?>">
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>
@@ -91,7 +92,8 @@ else {
     ?>
 </section>
 <?php
-if (isset($results) && $nb_results > $max_results_per_page) {
+// TODO: fix pagination
+if (isset($results) && $nb_results > $max_results_per_page && false) {
 ?>
     <nav id="pagination">
         <ul>

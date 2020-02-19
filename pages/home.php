@@ -1,5 +1,5 @@
 <?php
-$title = 'Drive research on your website !';
+$title = 'Drive research on your website!';
 require_once('templates/header.php');
 ?>
 

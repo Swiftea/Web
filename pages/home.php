@@ -10,6 +10,10 @@ require_once('templates/header.php');
         <input type="search" name="q" placeholder="Your search..." autocomplete="off" autofocus required>
         <button type="submit" class="btn"><i class="fas fa-search"></i> Search</button>
     </form>
+
+    <br>
+    <a href="internal-search">Internal search engine</a>
+
 </section>
 
 <?php require_once('templates/footer.php'); ?>

@@ -31,7 +31,7 @@ require_once('templates/header.php');
     <h2>Hosting</h2>
     <div class="card">
         <p>
-            The website and the database are stored free of charge at Alwaysata.
+            The website and the database are stored free of charge at Alwaysdata.
         </p>
     </div>
 </section>

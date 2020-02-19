@@ -1,5 +1,5 @@
 <?php
-$title = 'Open Source Database of the web';
+$title = 'Drive research on your website !';
 require_once('templates/header.php');
 ?>
 

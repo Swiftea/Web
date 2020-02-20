@@ -14,7 +14,7 @@ require_once('templates/header.php');
         </p>
         <ul>
             <li><a href="https://github.com/Swiftea/Crawler">Crawler</a>: it browses the web to know a maximum of webpages and fill our database. It is coded in Python.</li>
-            <li><a href="https://github.com/Swiftea/Web">Web</a>: this is the interface that shows you the results of your search and provides you an access to our database by using our API. It is written in PHP.</li>
+            <li><a href="https://github.com/Swiftea/Web">Web</a>: this is the interface that shows you the results of your search. It is written in PHP.</li>
         </ul>
     </div>
     <h2>Ranking</h2>

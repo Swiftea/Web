@@ -87,7 +87,7 @@ else {
         }
     }
     else {
-        echo '<span class="nb-results">Any result...</span>';
+        echo '<span class="nb-results">Any result for the moment... Please refresh the page a bit later.</span>';
     }
     ?>
 </section>

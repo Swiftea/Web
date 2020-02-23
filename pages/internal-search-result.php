@@ -43,7 +43,7 @@ list($results, $nb_results, $real_nb_results, $pages, $page) = search($keywords,
 <section id="search" class="search-inline search-inline">
     <p>Search in this website: <a href="<?php echo 'http://' . $domain; ?>"><?php echo $domain; ?></a></p>
     <form method="GET" action="internal-search-result">
-        <input type="search" name="q" placeholder="Your search..." autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v" required>
+        <input type="search" name="q" placeholder="Your search" autofocus value="<?php echo $search; ?>" onfocus="var v=this.value; this.value=''; this.value=v" required>
         <input type="hidden" name="d" value="<?php echo $_GET['d']; ?>">
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>

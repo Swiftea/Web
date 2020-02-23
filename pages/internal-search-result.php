@@ -1,66 +1,49 @@
 <?php
 // Get the user request
-
 $q = $search = htmlspecialchars(trim($_GET['q']));
 $q = mb_strtolower($q);
 $keywords = array_unique(explode(' ', $q));
 
 $domain = clean_domain(htmlspecialchars(trim($_GET['d'])));
-// If domain is empty, then redirect to classic search
+// If domain is empty, then redirect to global search
 if ($domain == '') {
     header("Location: search?q=" . $q);
     die();
 }
 
-$title = 'Internal search | ' . $search;
+$title = 'Search results | ' . $search;
 require_once('templates/header.php');
 require_once('search-engine.php');
 
-function start_crawler($domain) {
-    // Start domain crawler
-    $url = 'http://swifteasearch.alwaysdata.net/swiftea-server/start-crawler';
-    $data = array(
-        'url' => 'http://' . $domain,
-        'level' => '0',
-        // 'target-level' => '1',
-    );
-
-    $options = array(
-        'http' => array(
-            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-            'method'  => 'POST',
-            'content' => http_build_query($data)
-        )
-    );
-    $context  = stream_context_create($options);
-    $result = file_get_contents($url, false, $context);
-    if ($result === FALSE) { /* Handle error */ }
-}
-
 // Perform search
-start_crawler($domain);
-if (count($keywords) == 1 && $keywords[0] == '') {
-    // send all page in the given domain
-    require('config.php');
-    require('db.php');
-    $sql = "SELECT id, url, popularity, score, homepage, title, description, favicon FROM website w WHERE w.domain LIKE '%$domain%'";
-    $stmt = $db->prepare($sql);
-    $stmt->execute();
-    $results = $stmt->fetchAll();
-    $nb_results = count($results);
-    $pages = ceil($nb_results / $max_results_per_page);
-    $page = 1;
-}
-else {
-    list($results, $nb_results, $real_nb_results, $pages, $page) = search($keywords, $domain);
-}
 
+// Start domain crawler
+$url = 'http://swifteasearch.alwaysdata.net/swiftea-server/start-crawler';
+$data = array(
+    'url' => 'http://' . $domain,
+    'level' => '0',
+    // 'target-level' => '1',
+);
+
+$options = array(
+    'http' => array(
+        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+        'method'  => 'POST',
+        'content' => http_build_query($data)
+    )
+);
+$context  = stream_context_create($options);
+$result = file_get_contents($url, false, $context);
+if ($result === FALSE) { /* TODO: Handle error */ }
+
+// Handle results
+list($results, $nb_results, $real_nb_results, $pages, $page) = search($keywords, $domain);
 ?>
 
 <section id="search" class="search-inline search-inline">
     <p>Search in this website: <?php echo $domain; ?></p>
     <form method="GET" action="internal-search-result">
-        <input type="search" name="q" placeholder="Your search..." autocomplete="off" autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v">
+        <input type="search" name="q" placeholder="Your search..." autofocus value="<?php echo $search; ?>" size="1" onfocus="var v=this.value; this.value=''; this.value=v" required>
         <input type="hidden" name="d" value="<?php echo $_GET['d']; ?>">
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>
@@ -92,8 +75,7 @@ else {
     ?>
 </section>
 <?php
-// TODO: fix pagination
-if (isset($results) && $nb_results > $max_results_per_page && false) {
+if (isset($results) && $nb_results > $max_results_per_page) {
 ?>
     <nav id="pagination">
         <ul>

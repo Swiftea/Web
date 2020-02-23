@@ -7,7 +7,7 @@ require_once('templates/header.php');
     <a href="<?php echo get_base_url(); ?>" id="logo"><img src="assets/img/logo-241x75.png" alt="Swiftea"></a>
 
 	<form method="GET" action="internal-search-result">
-        <input type="search" name="q" placeholder="Your search" autofocus>
+        <input type="search" name="q" placeholder="Your search" autofocus required>
         <input type="text" name="d" placeholder="The URL of the site you want to browse">
         <button type="submit" class="btn"><i class="fas fa-search"></i> Search in this website</button>
     </form>

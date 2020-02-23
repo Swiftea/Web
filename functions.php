@@ -99,22 +99,9 @@ function truncate_str($str, $length, $beautiful = true) {
     return $trimmed_text;
 }
 
-function get_ip() {
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        return $_SERVER['HTTP_CLIENT_IP'];
-    }
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        return $_SERVER['HTTP_X_FORWARDED_FOR'];
-    }
-    else {
-        return $_SERVER['REMOTE_ADDR'];
-    }
-}
-
 function clean_domain($domain) {
-
-    if (substr($domain, 0, 7) !== "http://" && substr($domain, 0, 8) !== "https://" ) {
-        $domain = "http://" . $domain;
+    if (substr($domain, 0, 7) !== 'http://' && substr($domain, 0, 8) !== 'https://' ) {
+        $domain = 'http://' . $domain;
     }
     return parse_url($domain, PHP_URL_HOST);
 }

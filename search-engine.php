@@ -176,7 +176,6 @@ function search($keywords, $domain) {
             $ids_array = array_keys($rank_results2);
 
             // Pagination
-
             $pages = ceil($nb_results / $max_results_per_page);
 
             $page = isset($_GET['p']) && ctype_digit(strval($_GET['p'])) ? $_GET['p'] : 1;

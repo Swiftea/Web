@@ -1,5 +1,5 @@
 <?php
-$title = 'Internal search engine';
+$title = 'Drive research on your website!';
 require_once('templates/header.php');
 ?>
 

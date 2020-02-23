@@ -4,12 +4,7 @@ require_once('templates/header.php');
 ?>
 
 <section class="page">
-    <h1>Statut</h1>
-
-    <h2>Swiftea</h2>
-    <div class="card">
-        <p>HTTPS : <i class="fas fa-<?php echo is_https(get_base_url()) ? 'check' : 'times'; ?>"></i></p>
-    </div>
+    <h1>Status</h1>
 
     <h2>Data</h2>
     <div class="card">

@@ -5,7 +5,7 @@ require_once('templates/header.php');
 
 <section class="page">
     <h1>About</h1>
-    <p>Swiftea is an open-source tool to power your internal search engine developed by  <a href="https://github.com/Thykof">Nathan Seva</a> et <a href="https://hugo-posnic.fr">Hugo Posnic</a>.</p>
+    <p>Swiftea is an open-source tool to power your internal search engine developed by <a href="https://github.com/Thykof">Nathan Seva</a> and <a href="https://hugo-posnic.fr">Hugo Posnic</a>.</p>
 
     <h2>Open Source</h2>
     <div class="card">
